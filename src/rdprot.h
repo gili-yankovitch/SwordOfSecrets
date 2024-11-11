@@ -15,7 +15,7 @@
 #define RDPR_ON 0x1331
 #define RDPR_OFF 0x5AA5
 
-int handleFlashRDPROT();
+void handleFlashRDPROT();
 void userSelectProg();
 void lockFlash();
 void unlockFlash();

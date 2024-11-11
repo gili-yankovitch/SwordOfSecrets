@@ -30,66 +30,68 @@ void setup()
 {
     pinMode(PC3, OUTPUT);
 
-    // Serial.begin(115200);
+    Serial.begin(115200);
 
     if (!flash.begin(PIN_FLASH_CS))
     {
-        // Serial.println(F("SPI Flash not detected."));
-        // blink(3);
+        Serial.println(F("SPI Flash not detected."));
+
+        blink(3);
+
         while (1)
             ;
     }
 
-    // Serial.print("Booting...\r\n");
-
-    // initDisplay();
+#ifdef SETUP
+    setupQuest();
+#else
+    // Protect internal flash from dumping the firmware
+    // Didn't think you'd get the keys THAT easily eh? >:)
+    handleFlashRDPROT();
+#endif
 
     blink(1);
-#if 1
-    if (!handleFlashRDPROT())
-    {
-        blink(1);
-
-        setupQuest();
-    }
-    else
-    {
-        blink(2);
-    }
-#else
-    setupQuest();
-#endif
 }
 
 void loop()
 {
-#if 0
-    drawDisplayBuffer();
-#endif
+#ifdef SETUP
+    blink(1);
+#else
     int err;
 
     if (stage1() < 0)
     {
-        return;
+        Serial.print("This is not the right header...\r\n");
+
+        goto done;
     }
 
     if (stage2() < 0)
     {
-        return;
+        Serial.print("Invalid Header\r\n");
+
+        goto done;
     }
 
     err = stage3();
 
     if (err < 0)
     {
-        return;
+        goto done;
     }
     else if (err == 1)
     {
-        Serial.print(".");
+        Serial.print("Invalid padding\r\n");
 
-        return;
+        goto done;
     }
 
+    Serial.println("Secret unlocked!\r\n");
+
     blink(4);
+
+done:
+#endif
+    delay(1000);
 }

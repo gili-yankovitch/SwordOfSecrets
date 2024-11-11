@@ -15,17 +15,11 @@ void unlockFlashOBKEYR()
 
 void userSelectProg()
 {
-    char s[16];
+    // char s[16];
     unlockFlashCTLR();
     unlockFlashOBKEYR();
 
-    while (*FLASH_STATR != 0x8000)
-    {
-        // sprintf(s, "%lx\r\n", *FLASH_STATR);
-        // Serial.print(s);
-    }
-
-    // Serial.println("");
+    while (*FLASH_STATR != 0x8000) ;
 
     // Set OBG
     *FLASH_CTLR |= 1 << 4;
@@ -42,10 +36,9 @@ void unlockFlash()
     *RDPR = RDPR_OFF;
 }
 
-int handleFlashRDPROT()
+void handleFlashRDPROT()
 {
-    int err = -1;
-    char s[64];
+    // char s[64];
 
     // sprintf(s, "RDPR = %4x LOCK = %d OBWRE = %d\r\n",
     //     *RDPR,
@@ -60,16 +53,9 @@ int handleFlashRDPROT()
     {
         userSelectProg();
         lockFlash();
-
-        goto done;
     }
     else
     {
-        goto error;
+        Serial.print("Internal flash RDProt ENABLED\r\n");
     }
-
-done:
-    err = 0;
-error:
-    return err;
 }

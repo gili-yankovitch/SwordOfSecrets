@@ -2,8 +2,7 @@
 #include <SerialFlash.h>
 #include "aes.h"
 #include "keys.h"
-
-#define SETUP
+#include "secboot.h"
 
 #define S3(x) #x
 #define S2(x) S3(x)
@@ -20,6 +19,8 @@ static void xcryptXor(uint8_t * buf, size_t len)
         buf[i] ^= xor_key[i % sizeof(xor_key)];
     }
 }
+
+#ifndef SETUP
 
 int stage1()
 {
@@ -44,7 +45,7 @@ error:
     return err;
 }
 
-int checkPKCS7Pad(uint8_t * m, size_t len)
+static int checkPKCS7Pad(uint8_t * m, size_t len)
 {
     int err = -1;
     uint8_t pad = m[len - 1];
@@ -60,18 +61,6 @@ int checkPKCS7Pad(uint8_t * m, size_t len)
     err = 0;
 error:
     return err;
-}
-
-size_t PKCS7Pad(uint8_t * buf, size_t len)
-{
-    uint8_t pad = AES_BLOCKLEN - len % AES_BLOCKLEN;
-
-    for (int i = 0; i < pad; ++i)
-    {
-        buf[len + i] = pad;
-    }
-
-    return len + pad;
 }
 
 int stage2()
@@ -136,14 +125,24 @@ int stage3()
         goto error;
     }
 
-    Serial.print(">");
-
     err = 0;
 error:
     return err;
 }
 
-#ifdef SETUP
+#else
+
+static size_t PKCS7Pad(uint8_t * buf, size_t len)
+{
+    uint8_t pad = AES_BLOCKLEN - len % AES_BLOCKLEN;
+
+    for (int i = 0; i < pad; ++i)
+    {
+        buf[len + i] = pad;
+    }
+
+    return len + pad;
+}
 
 static void stage1Setup()
 {
@@ -151,12 +150,11 @@ static void stage1Setup()
     size_t len;
 
     // Create the mesasage
-
     len = strlen(message);
 
     xcryptXor((uint8_t *)message, len);
 
-    // Something happened... Botch the first four bytes
+    // Oh noes! Something happened... X_X
     *((uint32_t *)(message)) = random(0xffffffff);
 
     // Write the first flag to its corresponding address
@@ -169,11 +167,6 @@ static void stage2Setup()
     struct AES_ctx ctx;
     char message[128] = "Important message to transmit - " FLAG_BANNER "{53Cr37 5745H: " S(STAGE3_FLASH_ADDR) "}";
     size_t len;
-
-    // Create the message
-    //  sprintf(message, "Important message to transmit - %s{The best encryption known to man 0x%x}",
-    //     FLAG_BANNER,
-    //     STAGE3_FLASH_ADDR);
 
     // Pad with PKCS#7 to prepare for encryption
     len = PKCS7Pad((uint8_t *)message, strlen(message));
@@ -206,6 +199,9 @@ static void stage3Setup()
 
     // Encrypt
     AES_CBC_encrypt_buffer(&ctx, (uint8_t *)message, len);
+
+    // Oops... Something bad happened...
+    message[len - AES_BLOCKLEN - 1] = '\0';
 
     // Write buffer to flash
     flash.eraseBlock(STAGE3_FLASH_ADDR);
