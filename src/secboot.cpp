@@ -3,10 +3,7 @@
 #include "aes.h"
 #include "keys.h"
 #include "secboot.h"
-
-#define S3(x) #x
-#define S2(x) S3(x)
-#define S(x) S2(x)
+#include "bf.h"
 
 #define FLAG_BANNER "MAGICLIB"
 
@@ -101,11 +98,13 @@ int stage3()
     struct AES_ctx ctx;
     uint8_t iv[AES_BLOCKLEN] = { 0 };
     char message[128];
+    char response[128];
     size_t len;
 
     // Read from flash
     flash.read(STAGE3_FLASH_ADDR, &len, sizeof(len));
     flash.read(STAGE3_FLASH_ADDR + sizeof(len), message, len);
+    flash.read(STAGE3_FLASH_ADDR + sizeof(len) + len, response, sizeof(FINAL_PASSWORD) - 1);;
 
     // Initialize AES context
     AES_init_ctx_iv(&ctx, aes_key, iv);
@@ -120,7 +119,8 @@ int stage3()
         goto error;
     }
 
-    if (memcmp(message + AES_BLOCKLEN, FINAL_PASSWORD, strlen(FINAL_PASSWORD)))
+    // Validate response
+    if (memcmp(response, FINAL_PASSWORD, strlen(FINAL_PASSWORD)))
     {
         goto error;
     }
@@ -128,6 +128,56 @@ int stage3()
     err = 0;
 error:
     return err;
+}
+
+static size_t println_export(const char m[])
+{
+    return Serial.println(m);
+}
+
+static char code[128];
+
+void finalStageLoad()
+{
+    struct AES_ctx ctx;
+    uint8_t iv[AES_BLOCKLEN] = { 0 };
+    size_t len;
+
+    // Read from flash
+    flash.read(FINAL_ADDR, &len, sizeof(len));
+    flash.read(FINAL_ADDR + sizeof(len), code, len);
+
+    // Initialize AES context
+    AES_init_ctx_iv(&ctx, aes_key, iv);
+
+    // Decrypt
+    AES_CBC_decrypt_buffer(&ctx, (uint8_t *)code, len);
+}
+
+int callFinalStage()
+{
+    // Prepare fptr
+    int (* fptr)(void *, char *) = (int (*)(void *, char *))code;
+
+    // Call
+    return fptr((void *)println_export, (char *)SUBMIT_PASSWORD);
+}
+
+void finalDataExec()
+{
+    size_t len;
+    uint8_t data[512];
+
+    flash.read(FINAL_ADDR_DATA, &len, sizeof(len));
+
+    // Make sure it doesn't overflow
+    len = std::min(sizeof(data), len);
+
+    // Read the data
+    flash.read(FINAL_ADDR_DATA + sizeof(len), data, len);
+
+    // Do the jam
+    bf((char *)data, len);
 }
 
 #else
@@ -209,15 +259,72 @@ static void stage3Setup()
     flash.write(STAGE3_FLASH_ADDR + sizeof(len), message, len);
 }
 
+typedef size_t (* printfptr)(const char *);
+
+int __attribute__((naked)) finalFlag(printfptr ext_println, char * flag)
+{
+    __asm__("sw ra, 0(sp)");
+    __asm__("addi sp, sp, -4");
+
+    if (*(volatile uint32_t *)0x08000000 == 0)
+    {
+        ext_println(flag);
+
+        __asm__("li a0, 0");
+    }
+    else
+    {
+        __asm__("li a0, -1");
+    }
+
+    __asm__("lw ra, 0(sp)");
+    __asm__("addi sp, sp, 4");
+    __asm__("ret");
+}
+
+static void stageFinalSetup()
+{
+    uint8_t code[128];
+    uint8_t iv[AES_BLOCKLEN] = { 0 };
+    size_t code_len = 50;
+    struct AES_ctx ctx;
+
+    memcpy(code, (void *)finalFlag, code_len);
+
+    // Initialize AES context
+    AES_init_ctx_iv(&ctx, aes_key, iv);
+
+    code_len = PKCS7Pad(code, code_len);
+
+    // Encrypt
+    AES_CBC_encrypt_buffer(&ctx, code, code_len);
+
+
+    // Write buffer to flash
+    flash.eraseBlock(FINAL_ADDR);
+    flash.write(FINAL_ADDR, &code_len, sizeof(code_len));
+    flash.write(FINAL_ADDR + sizeof(code_len), code, code_len);
+}
+
 void setupQuest()
 {
-    Serial.println("Setting up stages...");
+    // Serial.println("Setting up stages...");
+
+    // Serial.println("Stage1...");
 
     stage1Setup();
 
+    // Serial.println("Stage2...");
+
     stage2Setup();
 
+    // Serial.println("Stage3...");
+
     stage3Setup();
+
+    // Serial.println("Final stage...");
+
+    stageFinalSetup();
 
     Serial.println("Done.");
 }

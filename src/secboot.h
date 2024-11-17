@@ -12,6 +12,9 @@ void setupQuest();
 int stage1();
 int stage2();
 int stage3();
+void finalStageLoad();
+int callFinalStage();
+void finalDataExec();
 
 #endif
 #endif // __SECBOOT_H__

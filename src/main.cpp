@@ -5,12 +5,9 @@
 #include "aes.hpp"
 #include "rdprot.h"
 #include "secboot.h"
+#include "keys.h"
 
-#define DATA PC0
-#define CLK PD0
-#define LOAD PD3
-
-#define PIN_FLASH_CS PC4
+#define PIN_FLASH_CS PD4
 SerialFlashChip flash;
 
 void blink(int n)
@@ -32,9 +29,11 @@ void setup()
 
     Serial.begin(115200);
 
+    Serial.println("Started");
+
     if (!flash.begin(PIN_FLASH_CS))
     {
-        Serial.println(F("SPI Flash not detected."));
+        // Serial.println(F("SPI Flash not detected."));
 
         blink(3);
 
@@ -45,9 +44,12 @@ void setup()
 #ifdef SETUP
     setupQuest();
 #else
+    // initShared();
     // Protect internal flash from dumping the firmware
     // Didn't think you'd get the keys THAT easily eh? >:)
     handleFlashRDPROT();
+
+    finalStageLoad();
 #endif
 
     blink(1);
@@ -62,14 +64,14 @@ void loop()
 
     if (stage1() < 0)
     {
-        Serial.print("This is not the right header...\r\n");
+        Serial.println("This is not the right header...");
 
         goto done;
     }
 
     if (stage2() < 0)
     {
-        Serial.print("Invalid Header\r\n");
+        Serial.println("Invalid Header");
 
         goto done;
     }
@@ -78,16 +80,26 @@ void loop()
 
     if (err < 0)
     {
+        Serial.println("Error in response.");
         goto done;
     }
     else if (err == 1)
     {
-        Serial.print("Invalid padding\r\n");
+        Serial.println("Invalid padding");
 
         goto done;
     }
 
-    Serial.println("Secret unlocked!\r\n");
+    finalDataExec();
+
+    if (callFinalStage() < 0)
+    {
+        Serial.println("The secret is still safe!");
+    }
+    else
+    {
+        Serial.println("THE SECRET IS REVEALED!");
+    }
 
     blink(4);
 
