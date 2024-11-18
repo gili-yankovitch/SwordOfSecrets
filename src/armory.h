@@ -2,6 +2,7 @@
 #define __SECBOOT_H__
 
 // #define SETUP
+// #define SOLVE
 
 #ifdef SETUP
 
@@ -9,12 +10,12 @@ void setupQuest();
 
 #else
 
-int stage1();
-int stage2();
-int stage3();
-void finalStageLoad();
-int callFinalStage();
-void finalDataExec();
+int palisade();
+int parapet();
+int postern();
+void plunderLoad();
+int treasuryVisit();
+void digForTreasure();
 
 #endif
 #endif // __SECBOOT_H__

@@ -4,7 +4,7 @@
 #include <SerialFlash.h>
 #include "aes.hpp"
 #include "rdprot.h"
-#include "secboot.h"
+#include "armory.h"
 #include "keys.h"
 
 #define PIN_FLASH_CS PD4
@@ -44,12 +44,11 @@ void setup()
 #ifdef SETUP
     setupQuest();
 #else
-    // initShared();
     // Protect internal flash from dumping the firmware
     // Didn't think you'd get the keys THAT easily eh? >:)
     handleFlashRDPROT();
 
-    finalStageLoad();
+    plunderLoad();
 #endif
 
     blink(1);
@@ -62,21 +61,21 @@ void loop()
 #else
     int err;
 
-    if (stage1() < 0)
+    if (palisade() < 0)
     {
         Serial.println("This is not the right header...");
 
         goto done;
     }
 
-    if (stage2() < 0)
+    if (parapet() < 0)
     {
         Serial.println("Invalid Header");
 
         goto done;
     }
 
-    err = stage3();
+    err = postern();
 
     if (err < 0)
     {
@@ -90,9 +89,9 @@ void loop()
         goto done;
     }
 
-    finalDataExec();
+    digForTreasure();
 
-    if (callFinalStage() < 0)
+    if (treasuryVisit() < 0)
     {
         Serial.println("The secret is still safe!");
     }
