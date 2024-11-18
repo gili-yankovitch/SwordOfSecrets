@@ -17,7 +17,8 @@ You, as the challenger, will face  a couple of tricks on the hardware level. It 
 * `aes.cpp` [AES implementation](https://github.com/kokke/tiny-AES-c)
 * `main.cpp` Boot and Setup
 * `rdprot.cpp` CH32V003 Internal flash read protection
-* `secboot.cpp` Setup and quest implementation
+
+... The rest is up to you. :-)
 
 ### You Will Need
 The following list is a recommended list of equipment that is suggested to solve the challenge:

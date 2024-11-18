@@ -2,8 +2,8 @@
 #include <SerialFlash.h>
 #include "aes.h"
 #include "keys.h"
-#include "secboot.h"
-#include "bf.h"
+#include "armory.h"
+#include "secret.h"
 
 #define FLAG_BANNER "MAGICLIB"
 
@@ -31,15 +31,13 @@ size_t PKCS7Pad(uint8_t * buf, size_t len)
 
 #ifndef SETUP
 
-int stage1()
+int palisade()
 {
     int err = -1;
     char message[128] = { 0 };
 
-    // Read the data from the flash
-    flash.read(STAGE1_FLASH_ADDR, message, sizeof(message));
+    flash.read(PALISADE_FLASH_ADDR, message, sizeof(message));
 
-    // Decrypt
     xcryptXor((uint8_t *)message, sizeof(message));
 
     if (memcmp(message, FLAG_BANNER, strlen(FLAG_BANNER)))
@@ -72,19 +70,16 @@ error:
     return err;
 }
 
-int stage2()
+int parapet()
 {
     int err = -1;
     struct AES_ctx ctx;
     char message[128];
 
-    // Read from flash
-    flash.read(STAGE2_FLASH_ADDR, message, sizeof(message));
+    flash.read(PARAPET_FLASH_ADDR, message, sizeof(message));
 
-    // Initialize AES context
     AES_init_ctx(&ctx, aes_key);
 
-    // Decrypt it all
     for (unsigned i = 0; i < sizeof(message) / AES_BLOCKLEN; ++i)
     {
         AES_ECB_decrypt(&ctx, (uint8_t *)message + i * AES_BLOCKLEN);
@@ -104,7 +99,7 @@ error:
     return err;
 }
 
-int stage3()
+int postern()
 {
     int err = -1;
     struct AES_ctx ctx;
@@ -113,19 +108,14 @@ int stage3()
     char response[128];
     size_t len;
 
-    // Read from flash
-    flash.read(STAGE3_FLASH_ADDR, &len, sizeof(len));
+    flash.read(POSTERN_FLASH_ADDR, &len, sizeof(len));
 
-    // Make sure it doesn't overflow
     len = std::min(len, sizeof(message));
 
-    flash.read(STAGE3_FLASH_ADDR + sizeof(len), message, len);
-    flash.read(STAGE3_FLASH_ADDR + sizeof(len) + len, response, sizeof(FINAL_PASSWORD) - 1);;
+    flash.read(POSTERN_FLASH_ADDR + sizeof(len), message, len);
+    flash.read(POSTERN_FLASH_ADDR + sizeof(len) + len, response, sizeof(FINAL_PASSWORD) - 1);;
 
-    // Initialize AES context
     AES_init_ctx_iv(&ctx, aes_key, iv);
-
-    // Decrypt
     AES_CBC_decrypt_buffer(&ctx, (uint8_t *)message, len);
 
     if (checkPKCS7Pad((uint8_t *)message, len) < 0)
@@ -137,7 +127,7 @@ int stage3()
 
     message[len - message[len - 1]] = '\0';
 
-    // Validate response
+    // Chet everything's OK!
     if (memcmp(response, FINAL_PASSWORD, strlen(FINAL_PASSWORD)))
     {
         goto error;
@@ -155,29 +145,26 @@ static size_t println_export(const char m[])
     return Serial.println(m);
 }
 
-static char code[128];
+char code[128];
 
-void finalStageLoad()
+void plunderLoad()
 {
     struct AES_ctx ctx;
     uint8_t iv[AES_BLOCKLEN] = { 0 };
     size_t len;
 
-    // Read from flash
-    flash.read(FINAL_ADDR, &len, sizeof(len));
+    flash.read(PLUNDER_ADDR, &len, sizeof(len));
 
-    // Make sure it doesn't overflow
+    // No overflows!!!11
     len = std::min(len, sizeof(code));
-    flash.read(FINAL_ADDR + sizeof(len), code, len);
+    flash.read(PLUNDER_ADDR + sizeof(len), code, len);
 
-    // Initialize AES context
     AES_init_ctx_iv(&ctx, aes_key, iv);
 
-    // Decrypt
     AES_CBC_decrypt_buffer(&ctx, (uint8_t *)code, len);
 }
 
-int callFinalStage()
+int treasuryVisit()
 {
     // Prepare fptr
     int (* fptr)(void *, char *) = (int (*)(void *, char *))code;
@@ -186,28 +173,28 @@ int callFinalStage()
     return fptr((void *)println_export, (char *)SUBMIT_PASSWORD);
 }
 
-void finalDataExec()
+void digForTreasure()
 {
     size_t len;
     uint8_t data[512];
 
-    flash.read(FINAL_ADDR_DATA, &len, sizeof(len));
+    flash.read(PLUNDER_ADDR_DATA, &len, sizeof(len));
 
     // Make sure it doesn't overflow
     len = std::min(sizeof(data), len);
 
     // Read the data
-    flash.read(FINAL_ADDR_DATA + sizeof(len), data, len);
+    flash.read(PLUNDER_ADDR_DATA + sizeof(len), data, len);
 
-    // Do the jam
-    bf((char *)data, len);
+    // Dig!
+    treasure((char *)data, len);
 }
 
 #else
 
-static void stage1Setup()
+static void palisadeSetup()
 {
-    char message[] = FLAG_BANNER "{No one can break this! " S(STAGE2_FLASH_ADDR) "}";
+    char message[] = FLAG_BANNER "{No one can break this! " S(PARAPET_FLASH_ADDR) "}";
     size_t len;
 
     // Create the mesasage
@@ -219,14 +206,14 @@ static void stage1Setup()
     *((uint32_t *)(message)) = random(0xffffffff);
 
     // Write the first flag to its corresponding address
-    flash.eraseBlock(STAGE1_FLASH_ADDR);
-    flash.write(STAGE1_FLASH_ADDR, message, len);
+    flash.eraseBlock(PALISADE_FLASH_ADDR);
+    flash.write(PALISADE_FLASH_ADDR, message, len);
 }
 
-static void stage2Setup()
+static void parapetSetup()
 {
     struct AES_ctx ctx;
-    char message[128] = "Important message to transmit - " FLAG_BANNER "{53Cr37 5745H: " S(STAGE3_FLASH_ADDR) "}";
+    char message[128] = "Important message to transmit - " FLAG_BANNER "{53Cr37 5745H: " S(POSTERN_FLASH_ADDR) "}";
     size_t len;
 
     // Pad with PKCS#7 to prepare for encryption
@@ -242,11 +229,11 @@ static void stage2Setup()
     }
 
     // Write buffer to flash
-    flash.eraseBlock(STAGE2_FLASH_ADDR);
-    flash.write(STAGE2_FLASH_ADDR, message, len);
+    flash.eraseBlock(PARAPET_FLASH_ADDR);
+    flash.write(PARAPET_FLASH_ADDR, message, len);
 }
 
-static void stage3Setup()
+static void posternSetup()
 {
     struct AES_ctx ctx;
     uint8_t iv[AES_BLOCKLEN] = { 0 };
@@ -265,14 +252,14 @@ static void stage3Setup()
     message[len - AES_BLOCKLEN - 1] = '\0';
 
     // Write buffer to flash
-    flash.eraseBlock(STAGE3_FLASH_ADDR);
-    flash.write(STAGE3_FLASH_ADDR, &len, sizeof(len));
-    flash.write(STAGE3_FLASH_ADDR + sizeof(len), message, len);
+    flash.eraseBlock(POSTERN_FLASH_ADDR);
+    flash.write(POSTERN_FLASH_ADDR, &len, sizeof(len));
+    flash.write(POSTERN_FLASH_ADDR + sizeof(len), message, len);
 }
 
 typedef size_t (* printfptr)(const char *);
 
-int __attribute__((naked)) finalFlag(printfptr ext_println, char * flag)
+int __attribute__((naked)) theSwordOfSecrets(printfptr ext_println, char * flag)
 {
     __asm__("sw ra, 0(sp)");
     __asm__("addi sp, sp, -4");
@@ -293,14 +280,14 @@ int __attribute__((naked)) finalFlag(printfptr ext_println, char * flag)
     __asm__("ret");
 }
 
-static void stageFinalSetup()
+static void prizeSetup()
 {
     uint8_t code[128];
     uint8_t iv[AES_BLOCKLEN] = { 0 };
     size_t code_len = 50;
     struct AES_ctx ctx;
 
-    memcpy(code, (void *)finalFlag, code_len);
+    memcpy(code, (void *)theSwordOfSecrets, code_len);
 
     // Initialize AES context
     AES_init_ctx_iv(&ctx, aes_key, iv);
@@ -312,30 +299,20 @@ static void stageFinalSetup()
 
 
     // Write buffer to flash
-    flash.eraseBlock(FINAL_ADDR);
-    flash.write(FINAL_ADDR, &code_len, sizeof(code_len));
-    flash.write(FINAL_ADDR + sizeof(code_len), code, code_len);
+    flash.eraseBlock(PLUNDER_ADDR);
+    flash.write(PLUNDER_ADDR, &code_len, sizeof(code_len));
+    flash.write(PLUNDER_ADDR + sizeof(code_len), code, code_len);
 }
 
 void setupQuest()
 {
-    // Serial.println("Setting up stages...");
+    palisadeSetup();
 
-    // Serial.println("Stage1...");
+    parapetSetup();
 
-    stage1Setup();
+    posternSetup();
 
-    // Serial.println("Stage2...");
-
-    stage2Setup();
-
-    // Serial.println("Stage3...");
-
-    stage3Setup();
-
-    // Serial.println("Final stage...");
-
-    stageFinalSetup();
+    prizeSetup();
 
     Serial.println("Done.");
 }
