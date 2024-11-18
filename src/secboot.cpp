@@ -9,7 +9,7 @@
 
 extern SerialFlashChip flash;
 
-static void xcryptXor(uint8_t * buf, size_t len)
+void xcryptXor(uint8_t * buf, size_t len)
 {
     for (unsigned i = 0; i < len; i++)
     {
@@ -17,12 +17,24 @@ static void xcryptXor(uint8_t * buf, size_t len)
     }
 }
 
+size_t PKCS7Pad(uint8_t * buf, size_t len)
+{
+    uint8_t pad = AES_BLOCKLEN - len % AES_BLOCKLEN;
+
+    for (int i = 0; i < pad; ++i)
+    {
+        buf[len + i] = pad;
+    }
+
+    return len + pad;
+}
+
 #ifndef SETUP
 
 int stage1()
 {
     int err = -1;
-    char message[128];
+    char message[128] = { 0 };
 
     // Read the data from the flash
     flash.read(STAGE1_FLASH_ADDR, message, sizeof(message));
@@ -35,7 +47,7 @@ int stage1()
         goto error;
     }
 
-    Serial.print(message);
+    Serial.println(message);
 
     err = 0;
 error:
@@ -85,7 +97,7 @@ int stage2()
 
     message[AES_BLOCKLEN * 2] = '\0';
 
-    Serial.print(message);
+    Serial.println(message);
 
     err = 0;
 error:
@@ -103,6 +115,10 @@ int stage3()
 
     // Read from flash
     flash.read(STAGE3_FLASH_ADDR, &len, sizeof(len));
+
+    // Make sure it doesn't overflow
+    len = std::min(len, sizeof(message));
+
     flash.read(STAGE3_FLASH_ADDR + sizeof(len), message, len);
     flash.read(STAGE3_FLASH_ADDR + sizeof(len) + len, response, sizeof(FINAL_PASSWORD) - 1);;
 
@@ -119,11 +135,15 @@ int stage3()
         goto error;
     }
 
+    message[len - message[len - 1]] = '\0';
+
     // Validate response
     if (memcmp(response, FINAL_PASSWORD, strlen(FINAL_PASSWORD)))
     {
         goto error;
     }
+
+    Serial.println(message);
 
     err = 0;
 error:
@@ -145,6 +165,9 @@ void finalStageLoad()
 
     // Read from flash
     flash.read(FINAL_ADDR, &len, sizeof(len));
+
+    // Make sure it doesn't overflow
+    len = std::min(len, sizeof(code));
     flash.read(FINAL_ADDR + sizeof(len), code, len);
 
     // Initialize AES context
@@ -182,25 +205,13 @@ void finalDataExec()
 
 #else
 
-static size_t PKCS7Pad(uint8_t * buf, size_t len)
-{
-    uint8_t pad = AES_BLOCKLEN - len % AES_BLOCKLEN;
-
-    for (int i = 0; i < pad; ++i)
-    {
-        buf[len + i] = pad;
-    }
-
-    return len + pad;
-}
-
 static void stage1Setup()
 {
-    char message[128] = FLAG_BANNER "{No one can break this! " S(STAGE2_FLASH_ADDR) "}";
+    char message[] = FLAG_BANNER "{No one can break this! " S(STAGE2_FLASH_ADDR) "}";
     size_t len;
 
     // Create the mesasage
-    len = strlen(message);
+    len = strlen(message) + 1;
 
     xcryptXor((uint8_t *)message, len);
 
