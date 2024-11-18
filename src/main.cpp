@@ -49,6 +49,8 @@ void setup()
     handleFlashRDPROT();
 
     plunderLoad();
+
+    Serial.println(INTRO_MESSAGE);
 #endif
 
     blink(1);
