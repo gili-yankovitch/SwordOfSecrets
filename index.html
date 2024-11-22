@@ -18,7 +18,9 @@ body {
 }
 
 .hero {
-  height: 100%;
+  @media (min-width: 768px) {
+	height: 100%;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,12 +154,13 @@ body {
     Designed for security researchers and hardware enthusiasts, the Sword of Secrets 
     is your ultimate mystery in digital exploration.
   </p>
+  
+  <img src = "images/sword.png" />
 
   <a href="https://github.com/gili-yankovitch/SwordOfSecrets" class="cta-button">
     View on GitHub
   </a>
-
-
+  
 <div class="features">
   <div class="feature-card">
 	<h3>A Hardware Escape-Room</h3>
