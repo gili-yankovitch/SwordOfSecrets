@@ -64,6 +64,7 @@ body {
 
 .title {
   font-size: 4rem;
+  margin-bottom: 0px;
   text-align: center;
   text-transform: uppercase;
   background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
@@ -222,7 +223,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
 }
 
 #output {
-  width: 80%;
+  width: 99%;
   height: 600px;
   margin: 0 auto;
   margin-top: 10px;
@@ -238,8 +239,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
 }
 
 #input {
-    width: 80%;
-
+  width: 99%;
   margin: 0 auto;
   margin-top: 10px;
   border-left: 0px;
@@ -268,8 +268,6 @@ canvas.emscripten { border: 0px none; background-color: black; }
       </div>
 
       <div class="spinner" id='spinner'></div>
-      <div class="emscripten" id="status">Downloading...</div>
-
 
       <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
@@ -278,6 +276,8 @@ canvas.emscripten { border: 0px none; background-color: black; }
       <textarea id="output" rows="8"></textarea>
 
       <input type = "text" id = "input" />
+
+    <div class="emscripten" id="status">Downloading...</div>
     </div>
 
     <script type='text/javascript'>
