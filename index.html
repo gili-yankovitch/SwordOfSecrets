@@ -123,6 +123,15 @@ body {
   position: relative;
 }
 
+.buttons
+{
+    margin-top: 20px;
+
+    @media (max-width: 767px) {
+        display: grid;
+    }
+}
+
 .feature-card {
   @media (max-width: 767px) {
     margin: 1rem;
@@ -159,7 +168,7 @@ body {
   
   <img src = "images/sword.png" />
 
-  <div style = "margin-top: 20px;">
+  <div class = "buttons">
     <a href="https://github.com/gili-yankovitch/SwordOfSecrets" class="cta-button">
       View on GitHub
     </a>
