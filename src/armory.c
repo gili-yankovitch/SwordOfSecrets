@@ -1,13 +1,16 @@
-#include <Arduino.h>
-#include <SerialFlash.h>
+#include <stdio.h>
+#include <string.h>
 #include "aes.h"
 #include "keys.h"
 #include "armory.h"
 #include "secret.h"
+#include "flash.h"
 
 #define FLAG_BANNER "MAGICLIB"
 
-extern SerialFlashChip flash;
+#ifndef MIN
+#define MIN(x, y) ((x < y) ? (x) : (y))
+#endif
 
 void xcryptXor(uint8_t * buf, size_t len)
 {
@@ -29,14 +32,14 @@ size_t PKCS7Pad(uint8_t * buf, size_t len)
     return len + pad;
 }
 
-#ifndef SETUP
+// #ifndef SETUP
 
 int palisade()
 {
     int err = -1;
     char message[128] = { 0 };
 
-    flash.read(PALISADE_FLASH_ADDR, message, sizeof(message));
+    flash_read(PALISADE_FLASH_ADDR, message, sizeof(message));
 
     xcryptXor((uint8_t *)message, sizeof(message));
 
@@ -45,7 +48,8 @@ int palisade()
         goto error;
     }
 
-    Serial.println(message);
+    printf(message);
+    printf("\r\n");
 
     err = 0;
 error:
@@ -76,7 +80,7 @@ int parapet()
     struct AES_ctx ctx;
     char message[128];
 
-    flash.read(PARAPET_FLASH_ADDR, message, sizeof(message));
+    flash_read(PARAPET_FLASH_ADDR, message, sizeof(message));
 
     AES_init_ctx(&ctx, aes_key);
 
@@ -92,7 +96,8 @@ int parapet()
 
     message[AES_BLOCKLEN * 2] = '\0';
 
-    Serial.println(message);
+    printf(message);
+    printf("\r\n");
 
     err = 0;
 error:
@@ -108,12 +113,12 @@ int postern()
     char response[128];
     size_t len;
 
-    flash.read(POSTERN_FLASH_ADDR, &len, sizeof(len));
+    flash_read(POSTERN_FLASH_ADDR, &len, sizeof(len));
 
-    len = std::min(len, sizeof(message));
+    len = MIN(len, sizeof(message));
 
-    flash.read(POSTERN_FLASH_ADDR + sizeof(len), message, len);
-    flash.read(POSTERN_FLASH_ADDR + sizeof(len) + len, response, sizeof(FINAL_PASSWORD) - 1);;
+    flash_read(POSTERN_FLASH_ADDR + sizeof(len), message, len);
+    flash_read(POSTERN_FLASH_ADDR + sizeof(len) + len, response, sizeof(FINAL_PASSWORD) - 1);;
 
     AES_init_ctx_iv(&ctx, aes_key, iv);
     AES_CBC_decrypt_buffer(&ctx, (uint8_t *)message, len);
@@ -133,7 +138,8 @@ int postern()
         goto error;
     }
 
-    Serial.println(message);
+    printf(message);
+    printf("\r\n");
 
     err = 0;
 error:
@@ -142,7 +148,8 @@ error:
 
 static size_t println_export(const char m[])
 {
-    return Serial.println(m);
+    int n = printf(m);
+    return printf("\r\n") + n;
 }
 
 char code[128];
@@ -153,11 +160,11 @@ void plunderLoad()
     uint8_t iv[AES_BLOCKLEN] = { 0 };
     size_t len;
 
-    flash.read(PLUNDER_ADDR, &len, sizeof(len));
+    flash_read(PLUNDER_ADDR, &len, sizeof(len));
 
     // No overflows!!!11
-    len = std::min(len, sizeof(code));
-    flash.read(PLUNDER_ADDR + sizeof(len), code, len);
+    len = MIN(len, sizeof(code));
+    flash_read(PLUNDER_ADDR + sizeof(len), code, len);
 
     AES_init_ctx_iv(&ctx, aes_key, iv);
 
@@ -178,19 +185,19 @@ void digForTreasure()
     size_t len;
     uint8_t data[512];
 
-    flash.read(PLUNDER_ADDR_DATA, &len, sizeof(len));
+    flash_read(PLUNDER_ADDR_DATA, &len, sizeof(len));
 
     // Make sure it doesn't overflow
-    len = std::min(sizeof(data), len);
+    len = MIN(sizeof(data), len);
 
     // Read the data
-    flash.read(PLUNDER_ADDR_DATA + sizeof(len), data, len);
+    flash_read(PLUNDER_ADDR_DATA + sizeof(len), data, len);
 
     // Dig!
     treasure((char *)data, len);
 }
 
-#else
+// #else
 
 static void palisadeSetup()
 {
@@ -203,11 +210,11 @@ static void palisadeSetup()
     xcryptXor((uint8_t *)message, len);
 
     // Oh noes! Something happened... X_X
-    *((uint32_t *)(message)) = random(0xffffffff);
+    *((uint32_t *)(message)) = 0x00000000; // random(0xffffffff);
 
     // Write the first flag to its corresponding address
-    flash.eraseBlock(PALISADE_FLASH_ADDR);
-    flash.write(PALISADE_FLASH_ADDR, message, len);
+    flash_erase_block(PALISADE_FLASH_ADDR);
+    flash_write(PALISADE_FLASH_ADDR, message, len);
 }
 
 static void parapetSetup()
@@ -229,8 +236,8 @@ static void parapetSetup()
     }
 
     // Write buffer to flash
-    flash.eraseBlock(PARAPET_FLASH_ADDR);
-    flash.write(PARAPET_FLASH_ADDR, message, len);
+    flash_erase_block(PARAPET_FLASH_ADDR);
+    flash_write(PARAPET_FLASH_ADDR, message, len);
 }
 
 static void posternSetup()
@@ -252,9 +259,9 @@ static void posternSetup()
     message[len - AES_BLOCKLEN - 1] = '\0';
 
     // Write buffer to flash
-    flash.eraseBlock(POSTERN_FLASH_ADDR);
-    flash.write(POSTERN_FLASH_ADDR, &len, sizeof(len));
-    flash.write(POSTERN_FLASH_ADDR + sizeof(len), message, len);
+    flash_erase_block(POSTERN_FLASH_ADDR);
+    flash_write(POSTERN_FLASH_ADDR, &len, sizeof(len));
+    flash_write(POSTERN_FLASH_ADDR + sizeof(len), message, len);
 }
 
 typedef size_t (* printfptr)(const char *);
@@ -299,9 +306,9 @@ static void prizeSetup()
 
 
     // Write buffer to flash
-    flash.eraseBlock(PLUNDER_ADDR);
-    flash.write(PLUNDER_ADDR, &code_len, sizeof(code_len));
-    flash.write(PLUNDER_ADDR + sizeof(code_len), code, code_len);
+    flash_erase_block(PLUNDER_ADDR);
+    flash_write(PLUNDER_ADDR, &code_len, sizeof(code_len));
+    flash_write(PLUNDER_ADDR + sizeof(code_len), code, code_len);
 }
 
 void setupQuest()
@@ -314,6 +321,6 @@ void setupQuest()
 
     prizeSetup();
 
-    Serial.println("Done.");
+    printf("Done." "\r\n");
 }
-#endif
+//#endif

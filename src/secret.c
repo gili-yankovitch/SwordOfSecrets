@@ -1,4 +1,6 @@
-#include <Arduino.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stddef.h>
 
 #define MEM_SIZE 256
 #define STACK_SIZE 16
@@ -13,8 +15,8 @@ void treasure(char * inst, size_t len)
             case '\053':  {      {          }     tape[dp]++; break;}
             case '\074': {        {        }   dp+=0xffffffff;break;}
             case   '\055':{        {      }       tape[dp]--; break;}
-            case    '.':    {       {    }    Serial.print(tape[dp]);
-            Serial.print(" ");      {    }      break;  }  case  '[':
+            case    '.':    {       {    }    printf("%x", tape[dp]);
+            printf(" ");            {    }      break;  }  case  '[':
             { if  (tape[dp]) {      {    }          stack[sp++] = ip;
             } else   {              {    }  uint8_t tmp = ip, depth =
             0;while(inst[tmp]){     {    }              if (inst[tmp]
@@ -24,6 +26,6 @@ void treasure(char * inst, size_t len)
             sp--;   }    break;   }    case   ('\066' +   39 ): {  if
             (tape[dp]      )    {   ip     =   stack  [sp - 1 ];    }
             else { sp--;   }    break;  }     default:   {   break; }
-            case ',':  {    tape[dp] =   Serial.read(  )  ;   break;}
+            case ',':  { tape[dp] = 0/*Serial.read(  )*/  ;   break;}
             }                                                       }
 }
