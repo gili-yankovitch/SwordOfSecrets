@@ -4,11 +4,11 @@
 // #define SETUP
 // #define SOLVE
 
-#ifdef SETUP
+// #ifdef SETUP
 
 void setupQuest();
 
-#else
+// #else
 
 int palisade();
 int parapet();
@@ -17,5 +17,5 @@ void plunderLoad();
 int treasuryVisit();
 void digForTreasure();
 
-#endif
+// #endif
 #endif // __SECBOOT_H__

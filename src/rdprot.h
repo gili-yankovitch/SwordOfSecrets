@@ -6,8 +6,14 @@
 #define FLASH_CTLR ((volatile uint32_t *)0x40022010)
 #define FLASH_STATR ((volatile uint32_t *)0x4002200C)
 #define RDPRT_KEY 0x000000A5
+#ifndef FLASH_KEY1
 #define FLASH_KEY1 0x45670123
+#endif
+
+#ifndef FLASH_KEY2
 #define FLASH_KEY2 0xCDEF89AB
+#endif
+
 #define FLASH_ADDR ((volatile uint32_t *)0x40022014)
 #define FLASH_OBR ((volatile uint32_t *)0x4002201C)
 #define FLASH_RDPR (*FLASH_OBR & (1 << 1))

@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include <stdio.h>
 #include "rdprot.h"
 
 void unlockFlashCTLR()
@@ -56,6 +56,6 @@ void handleFlashRDPROT()
     }
     else
     {
-        Serial.print("Internal flash RDProt ENABLED\r\n");
+        printf("Internal flash RDProt ENABLED\r\n");
     }
 }
