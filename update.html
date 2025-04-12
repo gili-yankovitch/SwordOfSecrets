@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sword of Secrets :: Firmware Flash Utility</title>
+<style>
+:root {
+  --neon-blue: #00f3ff;
+  --neon-purple: #b026ff;
+}
+
+body {
+  background: #0a0a0a;
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', monospace;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.hero {
+  @media (min-width: 768px) {
+	height: 100%;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.matrix-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.matrix-column {
+  position: absolute;
+  -top: -100%;
+  font-size: 1.2rem;
+  animation: fall linear infinite;
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue);
+  white-space: nowrap;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.logo-container {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 4rem;
+  margin-bottom: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+  animation: glowPulse 3s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 5px var(--neon-blue)); }
+  50% { filter: drop-shadow(0 0 15px var(--neon-purple)); }
+}
+
+.description {
+  max-width: 600px;
+  text-align: center;
+  margin: 2rem auto;
+  line-height: 1.6;
+  z-index: 1;
+  position: relative;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  color: white;
+  font-family: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  z-index: 1;
+  position: relative;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+}
+
+.features {
+ 
+  @media (min-width: 768px) {
+    display: grid;
+  }
+  
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+}
+
+.feature-card {
+  @media (max-width: 767px) {
+    margin: 1rem;
+  }
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1.5rem;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2);
+}
+
+body {
+  font-family: arial;
+  margin: 0;
+  padding: none;
+}
+
+.emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+div.emscripten { text-align: center; }
+div.emscripten_border { border: 1px solid black; }
+/* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+canvas.emscripten { border: 0px none; background-color: black; }
+
+#emscripten_logo {
+  display: inline-block;
+  margin: 0;
+  padding: 6px;
+  width: 265px;
+}
+
+.spinner {
+  height: 30px;
+  width: 30px;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: top;
+
+  -webkit-animation: rotation .8s linear infinite;
+  -moz-animation: rotation .8s linear infinite;
+  -o-animation: rotation .8s linear infinite;
+  animation: rotation 0.8s linear infinite;
+
+  border-left: 5px solid rgb(235, 235, 235);
+  border-right: 5px solid rgb(235, 235, 235);
+  border-bottom: 5px solid rgb(235, 235, 235);
+  border-top: 5px solid rgb(120, 120, 120);
+
+  border-radius: 100%;
+  background-color: rgb(189, 215, 46);
+}
+
+@-webkit-keyframes rotation {
+  from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotation {
+  from {-moz-transform: rotate(0deg);}
+  to {-moz-transform: rotate(360deg);}
+}
+@-o-keyframes rotation {
+  from {-o-transform: rotate(0deg);}
+  to {-o-transform: rotate(360deg);}
+}
+@keyframes rotation {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+
+#status {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 30px;
+  margin-left: 20px;
+  font-weight: bold;
+  color: rgb(120, 120, 120);
+}
+
+#progress {
+  height: 20px;
+  width: 300px;
+}
+
+#controls {
+  display: inline-block;
+  float: right;
+  vertical-align: top;
+  margin-top: 30px;
+  margin-right: 20px;
+}
+#log {
+  width: 99%;
+  height: 600px;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-left: 0px;
+  border-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  display: block;
+  background-color: black;
+  color: white;
+  font-family: 'Lucida Console', Monaco, monospace;
+  outline: none;
+}
+
+#control {
+  margin: 10px;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  color: white;
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  z-index: 1;
+  position: relative;
+  margin: 10px;
+}
+
+.cta-file {
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px;
+  color: white;
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  z-index: 1;
+  position: relative;
+  margin: 10px;
+}
+
+.cta-file:hover {
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+}
+
+</style>
+</head>
+<body>
+	<div class="hero">
+      <div class="matrix-bg" id="matrix-bg"></div>
+
+      <div class="logo-container">
+        <h1 class="title">Firmware Flash Utility</h1>
+      </div>
+
+	<div id = "control">
+  <input type="file" class = "cta-file" id="fileInput" />
+  <button id="connectBtn" class = "cta-button" >Connect to Serial Port</button>
+  <button id="sendBtn" disabled class = "cta-button">Flash</button>
+  </div>
+  <textarea id="log"></textarea>
+
+  
+  </div>
+
+  <script>
+    let port, writer, reader, fileBuffer;
+    const CHUNK_SIZE = 80;
+    const ACK_CHAR = 'V'.charCodeAt(0);
+
+    const log = (msg) => {
+	  var textarea = document.getElementById('log');
+      textarea.textContent += msg + '\n';
+	  textarea.scrollTop = textarea.scrollHeight;
+    };
+
+    const sleep = ms => new Promise(res => setTimeout(res, ms));
+
+    document.getElementById('connectBtn').addEventListener('click', async () => {
+      try {
+        port = await navigator.serial.requestPort();
+		
+		log('✅ Serial port connected.');
+		
+		document.getElementById('sendBtn').disabled = false;
+      } catch (err) {
+        log('❌ Error opening serial port: ' + err);
+      }
+    });
+
+    document.getElementById('fileInput').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      fileBuffer = await file.arrayBuffer();
+      log(`📦 Loaded file (${fileBuffer.byteLength} bytes).`);
+    });
+
+    async function waitForAck() {
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done)
+          {
+		    log("❓ Done for some reason");
+            break;
+          }
+          
+          if (!value)
+          {
+            continue;
+          }
+
+          for (let byte of value) {
+            if (byte === ACK_CHAR)
+			{
+			  return true;
+			}
+            else
+			{
+			  log("Received from device: '" + byte + "' (Requested: " + ACK_CHAR + ")");
+			  return false;
+			}
+          }
+        }
+      } catch (err) {
+        log('❌ Error reading from serial port: ' + err);
+      }
+      return false;
+    }
+	
+	async function closeSerialPort() {
+		try
+		{
+			await writer.close()
+
+			writer.releaseLock();
+			reader.releaseLock();
+			
+			await port.close();
+		}
+		catch (err) {
+			// Do nothing
+		}
+	}
+
+    async function dumpSerialOutput() {
+      log("📥 Starting UART dump mode:");
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done || !value) break;
+
+          const str = new TextDecoder().decode(value);
+          log(`📥 ${str}`);
+        }
+      } catch (err) {
+        log("❌ Serial read error during dump: " + err);
+      }
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+	  try
+	  {
+		if (port.connected)
+		{
+			await closeSerialPort();
+		}
+	    
+		await port.open({ baudRate: 115200 });
+		writer = port.writable.getWriter();
+        reader = port.readable.getReader();
+
+	 } catch (err) {
+        log('❌ Error opening serial port: ' + err);
+		
+      }
+	 
+	  
+      if (!fileBuffer || !writer || !reader) {
+        log("❌ File not loaded or serial port not connected.");
+		
+		await closeSerialPort();
+        return;
+      }
+
+      const data = new Uint8Array(fileBuffer);
+      const totalChunks = Math.ceil(data.length / CHUNK_SIZE);
+
+      for (let i = 0; i < totalChunks; i++) {
+        const chunk = data.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
+        await writer.write(chunk);
+        log(`➡️ Sent chunk ${i + 1} / ${totalChunks}`);
+
+        const gotAck = await waitForAck();
+        if (!gotAck) {
+          log("❌ Did not receive 'V'. Halting transmission.");
+          await dumpSerialOutput();
+		  
+		  await closeSerialPort();
+          break;
+        }
+        // await sleep(10); // small delay
+      }
+
+		await closeSerialPort();
+      log("✅ Transmission complete.");
+    });
+	
+	    // Matrix rain effect
+      const matrixBg = document.getElementById('matrix-bg');
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+      const columns = Math.floor(window.innerWidth / 20);
+
+      for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.className = 'matrix-column';
+        column.style.left = `${i * 20}px`;
+        
+        // Random content
+        let content = '';
+        for (let j = 0; j < 50; j++) {
+          content += characters[Math.floor(Math.random() * characters.length)] + '\n';
+        }
+        column.textContent = content;
+        
+        // Random animation duration and delay
+        const duration = 10 + Math.random() * 20;
+        const delay = Math.random() * -20;
+        column.style.animationDuration = `${duration}s`;
+        column.style.animationDelay = `${delay}s`;
+        
+        matrixBg.appendChild(column);
+      }
+
+      // Add hover effect to feature cards
+      const cards = document.querySelectorAll('.feature-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+        });
+      });
+  </script>
+  
+</body>
+</html>
