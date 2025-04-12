@@ -11,7 +11,7 @@
 #define CH32V003_SPI_NSS_SOFTWARE_ANY_MANUAL // #define CH32V003_SPI_NSS_HARDWARE_PC0
 #define CH32V003_SPI_IMPLEMENTATION
 
-#include "ch32v003fun/ch32v003_SPI.h"
+#include <ch32v003_SPI.h>
 
 #define CSASSERT()       funDigitalWrite(cs, FUN_LOW)
 #define CSRELEASE()       funDigitalWrite(cs, FUN_HIGH)
