@@ -1,3 +1,7 @@
-src/keys.h
+keys.h
 src/sim.py
-src/solve.*
+solve.*
+*.d
+*.o
+firmware*
+generated_ch32v003.ld
