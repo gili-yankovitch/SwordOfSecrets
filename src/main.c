@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
-#include "ch32v003fun/ch32v003fun.h"
-#include "aes.h"
-#include "rdprot.h"
-#include "armory.h"
-#include "keys.h"
-#include "flash.h"
+#include <ch32v003fun.h>
+#include <aes.h>
+#include <armory.h>
+#include <keys.h>
+#include <flash.h>
 
 #ifdef SOLVE
 #include "solve.h"
@@ -70,19 +69,19 @@ int setup()
 
     initial_jiffies = SysTick->CNT;
 
-	funPinMode( PC3, GPIO_Speed_10MHz | GPIO_CNF_OUT_PP );
-
-	SetupUART(UART_BRR);
-
     if (flash_init(PIN_FLASH_CS))
     {
         printf("Flash initialization success\r\n");
 
-        // blink(2);
+        blink(2);
     }
     else
     {
         printf("Flash initialization failed\r\n");
+
+        blink(4);
+
+        funDigitalWrite(PC3, FUN_HIGH);
 
         goto error;
     }
@@ -111,20 +110,13 @@ int setup()
         goto error;
     }
 
-// #ifdef SETUP
-// #else
 #ifdef SOLVE
     solve();
 #else
-    // Protect internal flash from dumping the firmware
-    // Didn't think you'd get the keys THAT easily eh? >:)
-    // handleFlashRDPROT();
-
     plunderLoad();
 
     printf(INTRO_MESSAGE "\r\n");
 #endif
-// #endif
 
     err = 0;
 error:
@@ -135,9 +127,8 @@ void loop()
 {
     handleChallengeStatus();
 
-// #ifdef SETUP
     blink(1);
-// #else
+
 #ifdef SOLVE
     printf("Done solving.\r\n");
 #else
@@ -187,15 +178,16 @@ void loop()
 done:
     Delay_Ms(1000);
 #endif
-// #endif
 }
 
 int main()
 {
-	SystemInit();
-
 	// Enable GPIOs
 	funGpioInitAll();
+
+	funPinMode( PC3, GPIO_Speed_10MHz | GPIO_CNF_OUT_PP );
+
+    blink(3);
 
     if (setup() < 0)
     {
