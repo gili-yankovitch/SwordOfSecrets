@@ -16,7 +16,6 @@ You, as the challenger, will face  a couple of tricks on the hardware level. It 
 ### Source structure
 * `aes.cpp` [AES implementation](https://github.com/kokke/tiny-AES-c)
 * `main.cpp` Boot and Setup
-* `rdprot.cpp` CH32V003 Internal flash read protection
 
 ... The rest is up to you. :-)
 
@@ -29,8 +28,8 @@ The following list is a recommended list of equipment that is suggested to solve
 
 ### Software
 Please install the following software to be able to flash software to the device:
-* [Arduino SDK](https://www.arduino.cc/en/software)
-* [Platformio](https://platformio.org/install/cli) or VScode with Platformio AddOn
+* [ch32fun](https://github.com/cnlohr/ch32fun/wiki/Installation) Follow install guide for toolchain and `minichlink` flash utility
+* [Flash Update](https://swordofsecrets.com/update.html) Use online update tool to update the sword using preflashed bootloader
 
 ### Hardware
 All PCB specs are provided here under `hw/`. This can be easily manufactured as well as paneled for a larger volume. There are no special requirements for this board's manufacturing process.
