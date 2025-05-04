@@ -12420,11 +12420,14 @@ extern "C" {
 // Stuff that can only be compiled on device (not for the programmer, or other host programs)
 
 #ifndef __ASSEMBLER__
-void handle_reset()            __attribute__((naked)) __attribute((section(".text.handle_reset"))) __attribute__((used));
-void DefaultIRQHandler( void ) __attribute__((section(".text.vector_handler"))) __attribute__((naked)) __attribute__((used));
+// GY: void handle_reset()            __attribute__((naked)) __attribute((section(".text.handle_reset"))) __attribute__((used));
+void handle_reset()            __attribute__((naked)) __attribute((section(".topflash.text"))) __attribute__((used));
+// GY: void DefaultIRQHandler( void ) __attribute__((section(".text.vector_handler"))) __attribute__((naked)) __attribute__((used));
+void DefaultIRQHandler( void ) __attribute__((section(".topflash.text"))) __attribute__((naked)) __attribute__((used));
 // used to clear the CSS flag in case of clock fail switch
 #if defined(FUNCONF_USE_CLK_SEC) && FUNCONF_USE_CLK_SEC
-	void NMI_RCC_CSS_IRQHandler( void ) __attribute__((section(".text.vector_handler"))) __attribute__((naked)) __attribute__((used));
+	// GY: void NMI_RCC_CSS_IRQHandler( void ) __attribute__((section(".text.vector_handler"))) __attribute__((naked)) __attribute__((used));
+	void NMI_RCC_CSS_IRQHandler( void ) __attribute__((section(".topflash.text"))) __attribute__((naked)) __attribute__((used));
 #endif
 #endif
 
