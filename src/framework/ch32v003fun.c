@@ -358,9 +358,10 @@ void __attribute__(( section(".topflash.text") )) *memchr(const void *src, int c
 
 int puts(const char *s)
 {
+    char newline[] = "\n";
 	int sl = strlen( s );
 	_write(0, s, sl );
-	_write(0, "\n", 1 );
+	_write(0, newline, 1 );
 	return sl + 1;
 }
 

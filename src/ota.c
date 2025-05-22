@@ -35,7 +35,10 @@ uint16_t __attribute__(( section(".topflash.text") )) cksum16(uint8_t * buf, siz
         sum += *((uint16_t *)(buf + i));
     }
 
-    return (sum & 0xffff) + (sum >> 16);
+    sum = (sum & 0xffff) + (sum >> 16);
+    sum = (sum & 0xffff) + (sum >> 16);
+
+    return sum;
 }
 
 void __attribute__((noinline, used, section(".topflash.text") )) recvChunk()
