@@ -4,24 +4,24 @@
 #include <string.h>
 #include <stdio.h>
 
-void __attribute__(( section(".topflash.text") )) uartInit()
+void __attribute__(( noinline, used, section(".topflash.text") )) uartInit()
 {
 	SetupUART(UART_BRR);
 }
 
-bool __attribute__(( section(".topflash.text") )) uartAvailable()
+bool __attribute__(( noinline, used, section(".topflash.text") )) uartAvailable()
 {
     return USART1->STATR & USART_FLAG_RXNE;
 }
 
-uint8_t __attribute__(( section(".topflash.text") )) _gets()
+uint8_t __attribute__(( noinline, used, section(".topflash.text") )) _gets()
 {
     while (!(USART1->STATR & USART_FLAG_RXNE));
     uint8_t c = (uint8_t)(USART1->DATAR & (uint8_t)0x00FF);
     return c;
 }
 
-ssize_t __attribute__(( section(".topflash.text") )) read(void * buf, size_t len)
+ssize_t __attribute__(( noinline, used, section(".topflash.text") )) read(void * buf, size_t len)
 {
     size_t i;
 

@@ -4,7 +4,15 @@
 #include <aes.h>
 #include <armory.h>
 #include <keys.h>
+#include <uart.h>
 #include <flash.h>
+
+#define CH32V003_SPI_SPEED_HZ (100000000/3)
+#define CH32V003_SPI_DIRECTION_2LINE_TXRX
+#define CH32V003_SPI_CLK_MODE_POL0_PHA0
+#define CH32V003_SPI_NSS_SOFTWARE_ANY_MANUAL // #define CH32V003_SPI_NSS_HARDWARE_PC0
+#define CH32V003_SPI_IMPLEMENTATION
+#include <ch32v003_SPI.h>
 
 #ifdef SOLVE
 #include "solve.h"
@@ -71,6 +79,7 @@ int setup()
 
     if (flash_init(PIN_FLASH_CS))
     {
+        blink(1);
         printf("Flash initialization success\r\n");
 
         blink(2);
@@ -127,7 +136,7 @@ void loop()
 {
     handleChallengeStatus();
 
-    blink(1);
+    // blink(1);
 
 #ifdef SOLVE
     printf("Done solving.\r\n");
@@ -176,8 +185,155 @@ void loop()
     blink(4);
 
 done:
-    Delay_Ms(1000);
+    // Delay_Ms(1000);
+    return;
 #endif
+}
+
+static int xtoi(char c)
+{
+    if (('A' <= c) && (c <= 'F'))
+    {
+        return 10 + c - 'A';
+    }
+
+    if (('a' <= c) && (c <= 'f'))
+    {
+        return 10 + c - 'a';
+    }
+
+    if (('0' <= c) && (c <= '9'))
+    {
+        return c - '0';
+    }
+
+    return -1;
+}
+
+static uint32_t atox(char * c)
+{
+    int v;
+    uint32_t total = 0;
+
+    while ((v = xtoi(*c++)) >= 0)
+    {
+        total = total * 16 + v;
+    }
+
+    return total;
+}
+
+int strcmp(const char *l, const char *r);
+int memcmp(const void *vl, const void *vr, size_t n);
+
+static void parseCmd(char * data, size_t len)
+{
+    size_t i;
+#if 1
+    if (!strcmp("SOLVE", data))
+    {
+        loop();
+    }
+    if (!strcmp("ASSERT", data))
+    {
+        funDigitalWrite(PIN_FLASH_CS, FUN_LOW);
+    }
+    else if (!strcmp("RELEASE", data))
+    {
+        funDigitalWrite(PIN_FLASH_CS, FUN_HIGH);
+    }
+    else if (!strcmp("BEGIN", data))
+    {
+        SPI_init();
+        SPI_begin_8();
+    }
+    else if (!strcmp("END", data))
+    {
+        SPI_end();
+    }
+    else if (!memcmp("DATA", data, 4))
+    {
+        if (len <= sizeof("DATA") - 1)
+        {
+            return;
+        }
+
+        // Data starts only after command
+        i = 4;
+
+        while (i < len)
+        {
+            if (xtoi(data[i]) < 0)
+            {
+                i++;
+                continue;
+            }
+
+            uint8_t in = atox(&data[i]);
+
+            uint8_t out = SPI_transfer_8(in);
+
+            printf("%02x ", out);
+
+            // Find the next non-number, which follows a number
+            // Finish the current number
+            while (xtoi(data[i]) >= 0)
+            {
+                i++;
+            }
+
+            // Skip all the next non-numbers
+            while (xtoi(data[i]) < 0)
+            {
+                i++;
+            }
+        }
+
+        printf("\r\n");
+    }
+#endif
+}
+
+static void handleSerialRead()
+{
+    char data[128];
+    size_t i = 0;
+    size_t len = 0;
+
+    printf(">> ");
+
+    while (len < sizeof(data))
+    {
+        data[len++] = _gets();
+
+        if ((data[len - 1] == '\r') || (data[len - 1] == '\n'))
+        {
+            printf("\r\n");
+
+            break;
+        }
+        else if (data[i - 1] == '\b')
+        {
+            if (i <= 1)
+            {
+                continue;
+            }
+
+            // Erase both the backspace as well as the previous char
+            i -= 2;
+        }
+        else
+        {
+            printf("%c", data[len - 1]);
+        }
+    }
+
+    data[len - 1] = '\0';
+
+    // Parse input
+    parseCmd(data, len);
+
+    printf("\r\n");
 }
 
 int main()
@@ -187,7 +343,7 @@ int main()
 
 	funPinMode( PC3, GPIO_Speed_10MHz | GPIO_CNF_OUT_PP );
 
-    blink(3);
+    // blink(3);
 
     if (setup() < 0)
     {
@@ -196,6 +352,6 @@ int main()
 
     while (1)
     {
-        loop();
+        handleSerialRead();
     }
 }

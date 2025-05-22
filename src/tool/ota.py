@@ -12,7 +12,7 @@ iv = bytes([ 0 ] * AES.block_size)
 
 DEBUG = False
 
-SERPORT = "/dev/ttyUSB1"
+SERPORT = "/dev/ttyUSB0"
 START_OFFSET = 0x1000
 END_OFFSET = 0x4000
 HEADER_SIZE = 8
@@ -36,7 +36,9 @@ def cksum16(data):
     sum = 0
     for i in range(0, len(data), 2):
         sum += unpack("H", data[i : i + 2])[0]
-    return (sum & 0xffff) + (sum >> 16)
+    sum = (sum & 0xffff) + (sum >> 16)
+    sum = (sum & 0xffff) + (sum >> 16)
+    return sum
 
 def chunk(data, addr, size):
     c = pack("HHHH",
