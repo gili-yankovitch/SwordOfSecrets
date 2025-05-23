@@ -229,7 +229,7 @@ int memcmp(const void *vl, const void *vr, size_t n);
 static void parseCmd(char * data, size_t len)
 {
     size_t i;
-#if 1
+
     if (!strcmp("SOLVE", data))
     {
         loop();
@@ -250,6 +250,11 @@ static void parseCmd(char * data, size_t len)
     else if (!strcmp("END", data))
     {
         SPI_end();
+    }
+    else if (!strcmp("RESET", data))
+    {
+        resetChallengeStatus();
+        setupQuest();
     }
     else if (!memcmp("DATA", data, 4))
     {
@@ -291,18 +296,16 @@ static void parseCmd(char * data, size_t len)
 
         printf("\r\n");
     }
-#endif
 }
 
 static void handleSerialRead()
 {
     char data[128];
-    size_t i = 0;
     size_t len = 0;
 
     printf(">> ");
 
-    while (len < sizeof(data))
+    while (len < sizeof(data) - 1)
     {
         data[len++] = _gets();
 
@@ -311,16 +314,6 @@ static void handleSerialRead()
             printf("\r\n");
 
             break;
-        }
-        else if (data[i - 1] == '\b')
-        {
-            if (i <= 1)
-            {
-                continue;
-            }
-
-            // Erase both the backspace as well as the previous char
-            i -= 2;
         }
         else
         {
