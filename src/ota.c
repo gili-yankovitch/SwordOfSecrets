@@ -117,7 +117,7 @@ void __attribute__(( noinline, used, section(".topflash.text") )) ota()
         return;
     }
 
-    // flashReadProtect();
+    flashReadProtect();
 
     updateInit();
 
