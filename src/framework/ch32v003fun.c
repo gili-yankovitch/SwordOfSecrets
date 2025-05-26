@@ -124,17 +124,17 @@ int wctomb(char *s, wchar_t wc)
 	return wcrtomb(s, wc, 0);
 }
 #endif
-size_t __attribute__(( section(".topflash.text") )) strlen(const char *s) { const char *a = s;for (; *s; s++);return s-a; }
-size_t __attribute__(( section(".topflash.text") )) strnlen(const char *s, size_t n) { const char *p = memchr(s, 0, n); return p ? p-s : n;}
+size_t strlen(const char *s) { const char *a = s;for (; *s; s++);return s-a; }
+size_t strnlen(const char *s, size_t n) { const char *p = memchr(s, 0, n); return p ? p-s : n;}
 void __attribute__(( section(".topflash.text") )) *memset(void *dest, int c, size_t n) { unsigned char *s = dest; for (; n; n--, s++) *s = c; return dest; }
-char __attribute__(( section(".topflash.text") )) *strcpy(char *d, const char *s) { for (; (*d=*s); s++, d++); return d; }
-char __attribute__(( section(".topflash.text") )) *strncpy(char *d, const char *s, size_t n) { for (; n && (*d=*s); n--, s++, d++); return d; }
-int __attribute__(( section(".topflash.text") )) strcmp(const char *l, const char *r)
+char *strcpy(char *d, const char *s) { for (; (*d=*s); s++, d++); return d; }
+char *strncpy(char *d, const char *s, size_t n) { for (; n && (*d=*s); n--, s++, d++); return d; }
+int strcmp(const char *l, const char *r)
 {
 	for (; *l==*r && *l; l++, r++);
 	return *(unsigned char *)l - *(unsigned char *)r;
 }
-int __attribute__(( section(".topflash.text") )) strncmp(const char *_l, const char *_r, size_t n)
+int strncmp(const char *_l, const char *_r, size_t n)
 {
 	const unsigned char *l=(void *)_l, *r=(void *)_r;
 	if (!n--) return 0;
@@ -294,7 +294,7 @@ char * strstr(const char *h, const char *n)
 	return twoway_strstr((void *)h, (void *)n);
 }
 
-char * __attribute__(( section(".topflash.text") )) strchr(const char *s, int c)
+char * strchr(const char *s, int c)
 {
 	c = (unsigned char)c;
 	if (!c) return (char *)s + strlen(s);
@@ -311,7 +311,7 @@ void * __attribute__(( section(".topflash.text") )) __memrchr(const void *m, int
 	return 0;
 }
 
-char * __attribute__(( section(".topflash.text") )) strrchr(const char *s, int c)
+char * strrchr(const char *s, int c)
 {
 	return __memrchr(s, c, strlen(s) + 1);
 }
