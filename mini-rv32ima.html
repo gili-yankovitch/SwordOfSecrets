@@ -348,12 +348,16 @@ canvas.emscripten { border: 0px none; background-color: black; }
 	        throw new TypeError('Input must be a string');
 	    }
 
+        /* 
 	    arr = value
 	        .split(/[\s,]+/) // Split by spaces or commas
 	        .filter(Boolean) // Remove empty strings
 	        .map((hex) => parseInt(hex, 16)); // Convert to integers
-
+        
 		Module.ccall("w25q_cmd", null, ["array", "number"], [arr, arr.length]);
+		*/
+		value += "\n";
+		Module.ccall("usart_send", null, ["array", "number"], [value.split('').map((x) => x.charCodeAt(0)), value.length]);
 	}
 
     document.addEventListener('DOMContentLoaded', () => {
