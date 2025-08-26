@@ -1,242 +1,296 @@
-<html><head><base href="." />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
-<title>Sword of Secrets - Hardware Hacking Project</title>
-<style>
-:root {
-  --neon-blue: #00f3ff;
-  --neon-purple: #b026ff;
-}
+<html>
 
-body {
-  background: #0a0a0a;
-  color: #e0e0e0;
-  font-family: 'Share Tech Mono', monospace;
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-.hero {
-  @media (min-width: 768px) {
-	height: 100%;
-  }
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.matrix-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.matrix-column {
-  position: absolute;
-  -top: -100%;
-  font-size: 1.2rem;
-  animation: fall linear infinite;
-  color: var(--neon-blue);
-  text-shadow: 0 0 5px var(--neon-blue);
-  white-space: nowrap;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
-.logo-container {
-  position: relative;
-  z-index: 1;
-}
-
-.title {
-  font-size: 4rem;
-  text-align: center;
-  text-transform: uppercase;
-  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
-  animation: glowPulse 3s infinite;
-}
-
-@keyframes glowPulse {
-  0%, 100% { filter: drop-shadow(0 0 5px var(--neon-blue)); }
-  50% { filter: drop-shadow(0 0 15px var(--neon-purple)); }
-}
-
-.description {
-  max-width: 600px;
-  text-align: center;
-  margin: 2rem auto;
-  line-height: 1.6;
-  z-index: 1;
-  position: relative;
-}
-
-.cta-button {
-  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-  border: none;
-  border-radius: 25px;
-  padding: 15px 30px;
-  color: white;
-  font-family: inherit;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  z-index: 1;
-  position: relative;
-  margin: 10px;
-}
-
-.cta-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
-  padding: 20px 35px;
-}
-
-.features {
- 
-  @media (min-width: 768px) {
-    display: grid;
-  }
-  
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  z-index: 1;
-  position: relative;
-}
-
-.buttons
-{
-    margin-top: 20px;
-
-    @media (max-width: 767px) {
-        display: grid;
+<head>
+  <base href="." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Sword of Secrets - Hardware Hacking Project</title>
+  <style>
+    :root {
+      --neon-blue: #00f3ff;
+      --neon-purple: #b026ff;
+      --gold: #ffd700;
+      --golden-yellow: #ffed4e;
+      --dark-gold: #daa520;
+      --brown-gold: #b8860b;
     }
-}
 
-.feature-card {
-  @media (max-width: 767px) {
-    margin: 1rem;
-  }
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 1.5rem;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2);
-}
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    .hero {
+      @media (min-width: 768px) {
+        height: 100%;
+      }
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .matrix-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .matrix-column {
+      position: absolute;
+      -top: -100%;
+      font-size: 1.2rem;
+      animation: fall linear infinite;
+      color: var(--neon-blue);
+      text-shadow: 0 0 5px var(--neon-blue);
+      white-space: nowrap;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+      }
+
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+
+    .logo-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .title {
+      font-size: 4rem;
+      text-align: center;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+      animation: glowPulse 3s infinite;
+    }
+
+    @keyframes glowPulse {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 5px var(--neon-blue));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 15px var(--neon-purple));
+      }
+    }
+
+    .description {
+      max-width: 600px;
+      text-align: center;
+      margin: 2rem auto;
+      line-height: 1.6;
+      z-index: 1;
+      position: relative;
+    }
+
+    .cta-button {
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      color: white;
+      font-family: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      z-index: 1;
+      position: relative;
+      margin: 10px;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+      padding: 20px 35px;
+    }
+
+    .golden-button {
+      background: linear-gradient(45deg, var(--gold), var(--dark-gold), var(--gold));
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      color: white;
+      font-family: inherit;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      z-index: 1;
+      position: relative;
+      margin: 10px;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    .golden-button:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+      background: linear-gradient(45deg, var(--golden-yellow), var(--gold), var(--golden-yellow));
+      padding: 20px 35px;
+    }
+
+    .features {
+
+      @media (min-width: 768px) {
+        display: grid;
+      }
+
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      z-index: 1;
+      position: relative;
+    }
+
+    .buttons {
+      margin-top: 20px;
+
+      @media (max-width: 767px) {
+        display: grid;
+      }
+    }
+
+    .feature-card {
+      @media (max-width: 767px) {
+        margin: 1rem;
+      }
+
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 1.5rem;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="hero">
-  <div class="matrix-bg" id="matrix-bg"></div>
+  <div class="hero">
+    <div class="matrix-bg" id="matrix-bg"></div>
 
-  <div class="logo-container">
-    <h1 class="title">Sword of Secrets</h1>
+    <div class="logo-container">
+      <h1 class="title">Sword of Secrets</h1>
+    </div>
+
+    <p class="description">
+      Unlock the hidden secrets of the sword. What kind of secrets lie in waiting?
+      Designed for security researchers and hardware enthusiasts, the Sword of Secrets
+      is your ultimate mystery in digital exploration.
+    </p>
+
+    <img src="images/sword.png" />
+
+    <div class="buttons">
+      <a href="https://github.com/gili-yankovitch/SwordOfSecrets" class="cta-button">
+        View on GitHub
+      </a>
+
+      <a href="mini-rv32ima.html" class="cta-button">
+        Virtual Challenge
+      </a>
+
+      <a href="update.html" class="cta-button">
+        Firmware Update
+      </a>
+    </div>
+
+    <div class="buttons" style="margin-top: 50px;">
+      <a href="mini-rv32ima-golden.html" class="golden-button">
+        Golden Challenge
+      </a>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>A Hardware Escape-Room</h3>
+        <p>Reverse Engineer the onboard chips to uncover its mysteries</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Secure Storage Exploitation</h3>
+        <p>Exploit your way through various software and hardware protection mechanisms to uncover the secrets</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Open Source Hardware</h3>
+        <p>Fully documented design files and firmware available on GitHub</p>
+      </div>
+    </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Matrix rain effect
+      const matrixBg = document.getElementById('matrix-bg');
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+      const columns = Math.floor(window.innerWidth / 20);
 
-  <p class="description">
-    Unlock the hidden secrets of the sword. What kind of secrets lie in waiting?
-    Designed for security researchers and hardware enthusiasts, the Sword of Secrets 
-    is your ultimate mystery in digital exploration.
-  </p>
-  
-  <img src = "images/sword.png" />
+      for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.className = 'matrix-column';
+        column.style.left = `${i * 20}px`;
 
-  <div class = "buttons">
-    <a href="https://github.com/gili-yankovitch/SwordOfSecrets" class="cta-button">
-      View on GitHub
-    </a>
+        // Random content
+        let content = '';
+        for (let j = 0; j < 50; j++) {
+          content += characters[Math.floor(Math.random() * characters.length)] + '\n';
+        }
+        column.textContent = content;
 
-    <a href = "mini-rv32ima.html" class = "cta-button">
-      Virtual Challenge
-    </a>
+        // Random animation duration and delay
+        const duration = 10 + Math.random() * 20;
+        const delay = Math.random() * -20;
+        column.style.animationDuration = `${duration}s`;
+        column.style.animationDelay = `${delay}s`;
 
-    <a href = "update.html" class = "cta-button">
-      Firmware Update
-    </a>
-  </div>
-  
-<div class="features">
-  <div class="feature-card">
-	<h3>A Hardware Escape-Room</h3>
-	<p>Reverse Engineer the onboard chips to uncover its mysteries</p>
-  </div>
+        matrixBg.appendChild(column);
+      }
 
-  <div class="feature-card">
-	<h3>Secure Storage Exploitation</h3>
-	<p>Exploit your way through various software and hardware protection mechanisms to uncover the secrets</p>
-  </div>
-
-  <div class="feature-card">
-	<h3>Open Source Hardware</h3>
-	<p>Fully documented design files and firmware available on GitHub</p>
-  </div>
-</div>
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Matrix rain effect
-  const matrixBg = document.getElementById('matrix-bg');
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
-  const columns = Math.floor(window.innerWidth / 20);
-
-  for (let i = 0; i < columns; i++) {
-    const column = document.createElement('div');
-    column.className = 'matrix-column';
-    column.style.left = `${i * 20}px`;
-    
-    // Random content
-    let content = '';
-    for (let j = 0; j < 50; j++) {
-      content += characters[Math.floor(Math.random() * characters.length)] + '\n';
-    }
-    column.textContent = content;
-    
-    // Random animation duration and delay
-    const duration = 10 + Math.random() * 20;
-    const delay = Math.random() * -20;
-    column.style.animationDuration = `${duration}s`;
-    column.style.animationDelay = `${delay}s`;
-    
-    matrixBg.appendChild(column);
-  }
-
-  // Add hover effect to feature cards
-  const cards = document.querySelectorAll('.feature-card');
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+      // Add hover effect to feature cards
+      const cards = document.querySelectorAll('.feature-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+        });
+      });
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-    });
-  });
-});
-</script>
-</body></html>
+  </script>
+</body>
+
+</html>

@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <ch32v003fun.h>
+#include <build-mode.h>
 #include <aes.h>
 #include <armory.h>
 #include <keys.h>
 #include <uart.h>
 #include <flash.h>
+#include <cli.h>
 
 #define CH32V003_SPI_SPEED_HZ (100000000/3)
 #define CH32V003_SPI_DIRECTION_2LINE_TXRX
@@ -83,6 +85,8 @@ int setup()
         printf("Flash initialization success\r\n");
 
         blink(2);
+
+        flash_load_ext_cmds();
     }
     else
     {
@@ -116,13 +120,15 @@ int setup()
 
         funDigitalWrite(PC3, FUN_HIGH);
 
-        goto error;
+        // goto error;
     }
 
 #ifdef SOLVE
     solve();
 #else
+#ifndef GOLD_CHALLENGE
     plunderLoad();
+#endif
 
     printf(INTRO_MESSAGE "\r\n");
 #endif
@@ -132,17 +138,26 @@ error:
     return err;
 }
 
-void loop()
+void challenges(char * challenge)
 {
     handleChallengeStatus();
-
     // blink(1);
 
 #ifdef SOLVE
     printf("Done solving.\r\n");
 #else
-    int err;
 
+#ifdef GOLD_CHALLENGE
+    attempts(challenge);
+
+    if (persuasion() < 0)
+    {
+        printf("Probably not...\r\n");
+
+        goto done;
+    }
+
+#else
     if (palisade() < 0)
     {
         printf("This is not the right header..." "\r\n");
@@ -157,7 +172,7 @@ void loop()
         goto done;
     }
 
-    err = postern();
+    int err = postern();
 
     if (err < 0)
     {
@@ -181,8 +196,8 @@ void loop()
     {
         printf("THE SECRET IS REVEALED!" "\r\n");
     }
-
-    blink(4);
+#endif
+    blink(1);
 
 done:
     // Delay_Ms(1000);
@@ -190,24 +205,40 @@ done:
 #endif
 }
 
-static int xtoi(char c)
+unsigned int xtoi(char c)
 {
-    if (('A' <= c) && (c <= 'F'))
+    switch (c)
     {
-        return 10 + c - 'A';
+        case 'F':
+        case 'E':
+        case 'D':
+        case 'C':
+        case 'B':
+        case 'A':
+            return 10 + (c - 'A');
+        case 'f':
+        case 'e':
+        case 'd':
+        case 'c':
+        case 'b':
+        case 'a':
+            return 10 + (c - 'a');
+        case '9':
+        case '8':
+        case '7':
+        case '6':
+        case '5':
+        case '4':
+        case '3':
+        case '2':
+        case '1':
+        case '0':
+            return c - '0';
+        default:
+            return 0xff;
     }
 
-    if (('a' <= c) && (c <= 'f'))
-    {
-        return 10 + c - 'a';
-    }
-
-    if (('0' <= c) && (c <= '9'))
-    {
-        return c - '0';
-    }
-
-    return -1;
+    return 0xff;
 }
 
 static uint32_t atox(char * c)
@@ -215,9 +246,11 @@ static uint32_t atox(char * c)
     int v;
     uint32_t total = 0;
 
-    while ((v = xtoi(*c++)) >= 0)
+    while ((v = xtoi(*c)) != 0xff)
     {
         total = total * 16 + v;
+
+        c++;
     }
 
     return total;
@@ -230,35 +263,35 @@ static void parseCmd(char * data, size_t len)
 {
     size_t i;
 
-    if (!strcmp("SOLVE", data))
+    if (!memcmp(CMD_SOLVE, data, sizeof(CMD_SOLVE) - 1))
     {
-        loop();
+        challenges(data + sizeof(CMD_SOLVE));
     }
-    if (!strcmp("ASSERT", data))
+    if (!strcmp(CMD_ASSERT, data))
     {
         funDigitalWrite(PIN_FLASH_CS, FUN_LOW);
     }
-    else if (!strcmp("RELEASE", data))
+    else if (!strcmp(CMD_RELEASE, data))
     {
         funDigitalWrite(PIN_FLASH_CS, FUN_HIGH);
     }
-    else if (!strcmp("BEGIN", data))
+    else if (!strcmp(CMD_BEGIN, data))
     {
         SPI_init();
         SPI_begin_8();
     }
-    else if (!strcmp("END", data))
+    else if (!strcmp(CMD_END, data))
     {
         SPI_end();
     }
-    else if (!strcmp("RESET", data))
+    else if (!strcmp(CMD_RESET, data))
     {
         resetChallengeStatus();
         setupQuest();
     }
-    else if (!memcmp("DATA", data, 4))
+    else if (!memcmp(CMD_DATA, data, 4))
     {
-        if (len <= sizeof("DATA") - 1)
+        if (len <= sizeof(CMD_DATA) - 1)
         {
             return;
         }
@@ -268,7 +301,7 @@ static void parseCmd(char * data, size_t len)
 
         while (i < len)
         {
-            if (xtoi(data[i]) < 0)
+            if (xtoi(data[i]) == 0xff)
             {
                 i++;
                 continue;
@@ -282,13 +315,13 @@ static void parseCmd(char * data, size_t len)
 
             // Find the next non-number, which follows a number
             // Finish the current number
-            while (xtoi(data[i]) >= 0)
+            while (xtoi(data[i]) != 0xff)
             {
                 i++;
             }
 
             // Skip all the next non-numbers
-            while (xtoi(data[i]) < 0)
+            while (xtoi(data[i]) == 0xff)
             {
                 i++;
             }
