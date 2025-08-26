@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Sword of Secrets - Hardware Hacking Project</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #b026ff;
+            --gold: #ffd700;
+            --golden-yellow: #ffed4e;
+            --dark-gold: #daa520;
+            --brown-gold: #b8860b;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1f0a 50%, #1a1a1a 100%);
+            color: var(--gold);
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            @media (min-width: 768px) {
+                height: 100%;
+            }
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .matrix-column {
+            position: absolute;
+            -top: -100%;
+            font-size: 1.2rem;
+            animation: fall linear infinite;
+            color: var(--gold);
+            text-shadow: 0 0 5px var(--gold);
+            white-space: nowrap;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 4rem;
+            margin-bottom: 0px;
+            text-align: center;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--gold), var(--golden-yellow), var(--gold), var(--brown-gold));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: goldenShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes goldenShimmer {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+                filter: drop-shadow(0 0 10px var(--gold));
+            }
+
+            50% {
+                background-position: 100% 50%;
+                filter: drop-shadow(0 0 20px var(--golden-yellow));
+            }
+        }
+
+        .description {
+            max-width: 600px;
+            text-align: center;
+            margin: 2rem auto;
+            line-height: 1.6;
+            z-index: 1;
+            position: relative;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold), var(--gold));
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            color: #1a1a1a;
+            font-family: inherit;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            z-index: 1;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(45deg, var(--golden-yellow), var(--gold), var(--golden-yellow));
+        }
+
+        .features {
+
+            @media (min-width: 768px) {
+                display: grid;
+            }
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+            position: relative;
+        }
+
+        .feature-card {
+            @media (max-width: 767px) {
+                margin: 1rem;
+            }
+
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(184, 134, 11, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        /* Enhanced letter animation for the title */
+        .title {
+            position: relative;
+        }
+
+        /* Floating particles effect */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, var(--gold), transparent);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        body {
+            font-family: arial;
+            margin: 0;
+            padding: none;
+        }
+
+        .emscripten {
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        div.emscripten {
+            text-align: center;
+        }
+
+        div.emscripten_border {
+            border: 1px solid black;
+        }
+
+        /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+        canvas.emscripten {
+            border: 0px none;
+            background-color: black;
+        }
+
+        #emscripten_logo {
+            display: inline-block;
+            margin: 0;
+            padding: 6px;
+            width: 265px;
+        }
+
+        .spinner {
+            height: 30px;
+            width: 30px;
+            margin: 0;
+            margin-top: 20px;
+            margin-left: 20px;
+            display: inline-block;
+            vertical-align: top;
+
+            -webkit-animation: rotation .8s linear infinite;
+            -moz-animation: rotation .8s linear infinite;
+            -o-animation: rotation .8s linear infinite;
+            animation: rotation 0.8s linear infinite;
+
+            border-left: 5px solid var(--gold);
+            border-right: 5px solid var(--gold);
+            border-bottom: 5px solid var(--gold);
+            border-top: 5px solid var(--dark-gold);
+
+            border-radius: 100%;
+            background-color: var(--golden-yellow);
+        }
+
+        @-webkit-keyframes rotation {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @-moz-keyframes rotation {
+            from {
+                -moz-transform: rotate(0deg);
+            }
+
+            to {
+                -moz-transform: rotate(360deg);
+            }
+        }
+
+        @-o-keyframes rotation {
+            from {
+                -o-transform: rotate(0deg);
+            }
+
+            to {
+                -o-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #status {
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 30px;
+            margin-left: 20px;
+            font-weight: bold;
+            color: var(--dark-gold);
+        }
+
+        #progress {
+            height: 20px;
+            width: 300px;
+        }
+
+        #controls {
+            display: inline-block;
+            float: right;
+            vertical-align: top;
+            margin-top: 30px;
+            margin-right: 20px;
+        }
+
+        #output {
+            width: calc(100% - 40px);
+            height: 600px;
+            margin: 20px;
+            margin-top: 10px;
+            border-left: 0px;
+            border-right: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            display: block;
+            background-color: #1a1a1a;
+            color: var(--gold);
+            font-family: 'Lucida Console', Monaco, monospace;
+            outline: none;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        #input {
+            width: calc(100% - 40px);
+            margin: 20px;
+            margin-top: 10px;
+            border-left: 0px;
+            border-right: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            display: block;
+            background-color: #2d1f0a;
+            color: var(--gold);
+            font-family: 'Lucida Console', Monaco, monospace;
+            outline: none;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            box-sizing: border-box;
+
+            @media (max-width: 767px) {
+                font-size: 2em;
+                width: calc(100% - 20px);
+                margin: 10px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+        /* Golden highlight effects */
+        .highlight {
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            padding: 2px 8px;
+            border-radius: 5px;
+            color: var(--golden-yellow);
+            font-weight: bold;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="floating-particles" id="particles"></div>
+
+    <div class="hero">
+        <div class="matrix-bg" id="matrix-bg"></div>
+
+        <div class="logo-container">
+            <h1 class="title">Sword of Secrets</h1>
+        </div>
+
+        <div class="spinner" id='spinner'></div>
+
+        <div class="emscripten">
+            <progress value="0" max="100" id="progress" hidden=1></progress>
+        </div>
+
+        <textarea id="output" rows="8"></textarea>
+
+        <input type="text" id="input" />
+
+        <div class="emscripten" id="status">Downloading...</div>
+    </div>
+
+    <script type='text/javascript'>
+        var statusElement = document.getElementById('status');
+        var progressElement = document.getElementById('progress');
+        var spinnerElement = document.getElementById('spinner');
+
+        var Module = {
+            print: (function () {
+                var element = document.getElementById('output');
+                if (element) element.value = ''; // clear browser cache
+                return (...args) => {
+                    var text = args.join(' ');
+                    // These replacements are necessary if you render to raw HTML
+                    //text = text.replace(/&/g, "&amp;");
+                    //text = text.replace(/</g, "&lt;");
+                    //text = text.replace(/>/g, "&gt;");
+                    //text = text.replace('\n', '<br>', 'g');
+                    console.log(text);
+                    if (element) {
+                        element.value += text + "\n";
+                        element.scrollTop = element.scrollHeight; // focus on bottom
+                    }
+                };
+            })(),
+            setStatus: (text) => {
+                Module.setStatus.last ??= { time: Date.now(), text: '' };
+                if (text === Module.setStatus.last.text) return;
+                var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+                var now = Date.now();
+                if (m && now - Module.setStatus.last.time < 30) return; // if this is a progress update, skip it if too soon
+                Module.setStatus.last.time = now;
+                Module.setStatus.last.text = text;
+                if (m) {
+                    text = m[1];
+                    progressElement.value = parseInt(m[2]) * 100;
+                    progressElement.max = parseInt(m[4]) * 100;
+                    progressElement.hidden = false;
+                    spinnerElement.hidden = false;
+                } else {
+                    progressElement.value = null;
+                    progressElement.max = null;
+                    progressElement.hidden = true;
+                    if (!text) spinnerElement.style.display = 'none';
+                }
+                statusElement.innerHTML = text;
+            },
+            totalDependencies: 0,
+            monitorRunDependencies: (left) => {
+                this.totalDependencies = Math.max(this.totalDependencies, left);
+                Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+            }
+        };
+        Module.setStatus('Downloading...');
+        window.onerror = (event) => {
+            // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+            Module.setStatus('Exception thrown, see JavaScript console');
+            spinnerElement.style.display = 'none';
+            Module.setStatus = (text) => {
+                if (text) console.error('[post-exception status] ' + text);
+            };
+        };
+
+        function submitSPICMD(value) {
+            // Convert string to a list of numbers
+            if (typeof value !== 'string') {
+                throw new TypeError('Input must be a string');
+            }
+
+            /* 
+          arr = value
+              .split(/[\s,]+/) // Split by spaces or commas
+              .filter(Boolean) // Remove empty strings
+              .map((hex) => parseInt(hex, 16)); // Convert to integers
+            
+        Module.ccall("w25q_cmd", null, ["array", "number"], [arr, arr.length]);
+          */
+
+            value += "\n";
+            Module.ccall("usart_send", null, ["array", "number"], [value.split('').map((x) => x.charCodeAt(0)), value.length]);
+
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputField = document.getElementById("input");
+
+            if (!inputField) {
+                console.error("Input field with ID 'input' not found.");
+                return;
+            }
+
+            inputField.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent form submission, if applicable
+                    submitSPICMD(inputField.value);
+
+                    inputField.value = "";
+                }
+            });
+
+            inputField.focus();
+
+            // Create floating particles
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 15;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 6 + 's';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            // Initialize particles
+            createParticles();
+
+            // Matrix rain effect
+            const matrixBg = document.getElementById('matrix-bg');
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+            const columns = Math.floor(window.innerWidth / 20);
+
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${i * 20}px`;
+
+                // Random content
+                let content = '';
+                for (let j = 0; j < 50; j++) {
+                    content += characters[Math.floor(Math.random() * characters.length)] + '\n';
+                }
+                column.textContent = content;
+
+                // Random animation duration and delay
+                const duration = 10 + Math.random() * 20;
+                const delay = Math.random() * -20;
+                column.style.animationDuration = `${duration}s`;
+                column.style.animationDelay = `${delay}s`;
+
+                matrixBg.appendChild(column);
+            }
+
+            // Add hover effect to feature cards
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.backgroundColor = 'rgba(255, 215, 0, 0.15)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.backgroundColor = 'linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(184, 134, 11, 0.05))';
+                });
+            });
+        });
+
+    </script>
+    <script async type="text/javascript" src="mini-rv32ima-golden.js"></script>
+</body>
+
+</html>
