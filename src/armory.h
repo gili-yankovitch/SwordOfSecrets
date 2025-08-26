@@ -13,6 +13,7 @@ void setupQuest();
 int palisade();
 int parapet();
 int postern();
+int plenty();
 void plunderLoad();
 int treasuryVisit();
 void digForTreasure();

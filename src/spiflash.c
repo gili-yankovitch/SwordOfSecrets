@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+#include <flash.h>
 
 #define CH32V003_SPI_SPEED_HZ (100000000/3)
 // #define CH32V003_SPI_SPEED_HZ 50000000
@@ -26,6 +27,8 @@
 static int cs = -1;
 static uint8_t flags = 0;
 static uint8_t busy = 0;
+
+struct _ext_cmds_s flash_ext_cmds;
 
 static void flash_wait()
 {
@@ -308,6 +311,81 @@ void flash_read_status_registers()
 	// SPI_end();
 }
 
+void flash_erase_block_ext(uint32_t addr)
+{
+	if (busy) flash_wait();
+	SPI_begin_8();
+	CSASSERT();
+	SPI_transfer_8(0x06); // write enable command
+	CSRELEASE();
+	Delay_Us(1);
+
+	CSASSERT();
+	SPI_transfer_8(flash_ext_cmds.erase); // 0x44
+	SPI_transfer_8(((addr >> 16) & 0xff));
+	SPI_transfer_8((addr >> 8) & 0xff);
+	SPI_transfer_8(addr & 0xff);
+	CSRELEASE();
+	SPI_end();
+	busy = 2;
+}
+
+void flash_read_ext(uint32_t addr, void * buf, size_t len)
+{
+	uint8_t *p = (uint8_t *)buf;
+
+	if (busy)
+	    flash_wait();
+
+	memset(p, 0, len);
+    SPI_begin_8();
+	len = MIN(len, 256);
+	CSASSERT();
+	SPI_transfer_8(flash_ext_cmds.read); // 0x48
+	SPI_transfer_8(((addr >> 16) & 0xff));
+	SPI_transfer_8((addr >> 8) & 0xff);
+	SPI_transfer_8(addr & 0xff);
+
+	// Write a dummy byte
+	SPI_transfer_8(0);
+
+	for (int i = 0; i < len; i++)
+	{
+	    p[i] = SPI_transfer_8(0);
+	}
+	CSRELEASE();
+	SPI_end();
+}
+
+void flash_write_ext(uint32_t addr, void * buf, size_t len)
+{
+
+	const uint8_t *p = (const uint8_t *)buf;
+
+	len = MIN(len, 256);
+
+	if (busy) flash_wait();
+	SPI_begin_8();
+	CSASSERT();
+	// write enable command
+	SPI_transfer_8(0x06);
+	CSRELEASE();
+
+	Delay_Us(1);
+	CSASSERT();
+	SPI_transfer_8(flash_ext_cmds.write); // 0x42
+	SPI_transfer_8(((addr >> 16) & 0xff));
+	SPI_transfer_8((addr >> 8) & 0xff);
+	SPI_transfer_8(addr & 0xff);
+
+	do {
+		SPI_transfer_8(*p++);
+	} while (--len > 0);
+	CSRELEASE();
+	busy = 4;
+	SPI_end();
+}
+
 void flash_write(uint32_t addr, void * buf, size_t len)
 {
 	const uint8_t *p = (const uint8_t *)buf;
@@ -370,4 +448,16 @@ void flash_erase_block(uint32_t addr)
 	CSRELEASE();
 	SPI_end();
 	busy = 2;
+}
+
+
+void flash_load_ext_cmds()
+{
+    flash_read(EXT_CMDS_ADDR, &flash_ext_cmds, sizeof(flash_ext_cmds));
+#if 0
+    printf("Read: 0x%x Write: 0x%x Erase: 0x%x\r\n",
+        flash_ext_cmds.read,
+        flash_ext_cmds.write,
+        flash_ext_cmds.erase);
+#endif
 }
