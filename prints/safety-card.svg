@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50mm"
+   height="90mm"
+   viewBox="0 0 50 90"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="safety-card.svg"
+   inkscape:export-filename="/home/giliy/sos-wsl/prints/safety-card.png"
+   inkscape:export-xdpi="600"
+   inkscape:export-ydpi="600"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="3.0350628"
+     inkscape:cx="21.416361"
+     inkscape:cy="197.52474"
+     inkscape:window-width="3440"
+     inkscape:window-height="1310"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g15"
+     inkscape:pageshadow="0"
+     showgrid="false" />
+  <defs
+     id="defs1">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect16"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1"
+       radius="10"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false"
+       satellites_param="F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1" />
+    <rect
+       x="11.403198"
+       y="33.653339"
+       width="188.80803"
+       height="330.15546"
+       id="rect2" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1"
+       radius="10"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false"
+       satellites_param="F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1 @ F,0,0,1,0,2.6458333,0,1" />
+    <rect
+       x="11.403198"
+       y="33.653339"
+       width="188.51916"
+       height="330.09468"
+       id="rect15" />
+  </defs>
+  <g
+     inkscape:label="English"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-2.847424,-5.3589034)"
+       id="text2"
+       style="font-size:10.6667px;font-family:'5x5 regular';-inkscape-font-specification:'5x5 regular, ';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.944882;stroke-dasharray:none;stroke-opacity:1"
+       x="0"
+       y="0"
+       inkscape:label="Content"><tspan
+         x="11.402344"
+         y="43.091827"
+         id="tspan314499"><tspan
+           dx="0 0 0 0 9.4553804 0 0 0 0 0 9.4553804 0 0 9.4553804 0 0 0 0 0 0 0 9.4553881 0 0 9.4553728"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314497">The Sword of Secrets is an </tspan></tspan><tspan
+         x="11.402344"
+         y="56.425201"
+         id="tspan314503"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 17.161865 0 0 0 0 0 0 0 0 17.161854"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314501">educational hardware device </tspan></tspan><tspan
+         x="11.402344"
+         y="69.758575"
+         id="tspan314507"><tspan
+           dx="0 0 0 0 0 0 0 0 0 6.8418322 0 0 0 6.8418322 0 0 0 6.8418322 0 0 6.8418245 0 0 0 0 0 0 6.8418169"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314505">intended for use by adults or </tspan></tspan><tspan
+         x="11.402344"
+         y="83.091949"
+         id="tspan314511"><tspan
+           dx="0 0 0 0 0 0 0.94109416 0 0 0 0 0 0.94109416 0 0 0 0 0 0 0 0 0 0 0 0 0.9411056 0 0 0.94109035 0 0 0.9411056 0 0 0 0.94109035"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314509">under adult supervision. It is not a </tspan></tspan><tspan
+         x="11.402344"
+         y="96.425323"
+         id="tspan314515"><tspan
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314513">toy.
+</tspan></tspan><tspan
+         x="11.402344"
+         y="109.7587"
+         id="tspan314519"><tspan
+           dx="0 0 0 5.1574507 0 0 0 5.1574488 0 0 0 0 0 0 5.1574526 0 0 5.1574526 0 0 0 0 0 0 0 5.157445"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314517">Do not modify or connect non-</tspan></tspan><tspan
+         x="11.402344"
+         y="123.09207"
+         id="tspan314523"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 12.415208 0 0 0 0 0 0 0 0 0 0 0 12.415212 0 0 12.415212"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314521">compliant peripherals to the </tspan></tspan><tspan
+         x="11.402344"
+         y="136.42544"
+         id="tspan314527"><tspan
+           dx="0 0 0 0 0 0 0 0 8.4377642 0 0 0 0 0 0 8.4377565 0 0 0 8.4377565"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314525">device. Cables and connectors </tspan></tspan><tspan
+         x="11.402344"
+         y="149.75882"
+         id="tspan314531"><tspan
+           dx="0 0 0 0 0 11.784993 0 0 0 0 11.784993 0 0 0 0 0 0 0 11.785001"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314529">used must provide adequate </tspan></tspan><tspan
+         x="11.402344"
+         y="163.09219"
+         id="tspan314535"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 8.0644999 0 0 0 8.064496 0 0 0 0 8.0645037"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314533">insulation and meet applicable </tspan></tspan><tspan
+         x="11.402344"
+         y="176.42557"
+         id="tspan314539"><tspan
+           dx="0 0 0 0 0 0 0 96.251015"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314537">safety standards.
+</tspan></tspan><tspan
+         x="11.402344"
+         y="189.75894"
+         id="tspan314543"><tspan
+           dx="0 0 0 0 0 14.083611 0 0 0 0 0 0 0 14.083615 0 0 0 0 0 0 0 0 14.083623"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314541">This product contains small </tspan></tspan><tspan
+         x="11.402344"
+         y="203.09231"
+         id="tspan314547"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 2.3790901 0 0 0 0 0 2.3790939 0 0 0 2.3790863 0 0 0 0 0 2.3790786"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314545">electronic parts and sharp edges; </tspan></tspan><tspan
+         x="11.402344"
+         y="216.42569"
+         id="tspan314551"><tspan
+           dx="0 0 0 0 0 5.5054007 0 0 0 0 5.5054026 0 0 0 0 5.5054064 0 0 0 0 0 5.5053911"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314549">keep away from small children.
+</tspan></tspan><tspan
+         x="11.402344"
+         y="229.75906"
+         id="tspan314555"><tspan
+           dx="0 0 0 0 12.116101 0 0 0 0 0 0 12.116094 0 0 12.116101 0 0 0 0 0 0 0 0 12.116094"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314553">The device is designed for </tspan></tspan><tspan
+         x="11.402344"
+         y="243.09244"
+         id="tspan314559"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10.461324 0 0 0 0 10.461324"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314557">experimentation with hardware </tspan></tspan><tspan
+         x="11.402344"
+         y="256.42581"
+         id="tspan314563"><tspan
+           dx="0 0 0 0 1.1217659 0 0 0 0 0 0 0 0 1.121762 0 0 0 0 0 0 0 0 0 0 0 1.1217697"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314561">and software challenges. Improper </tspan></tspan><tspan
+         x="11.402344"
+         y="269.75919"
+         id="tspan314567"><tspan
+           dx="0 0 0 0 2.4437015 0 0 0 2.4436996 0 0 0 0 0 0 2.4437072 0 0 2.4437072 0 0 0 0 0 0 2.4436996 0 0 2.4436996"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314565">use may result in damage to the </tspan></tspan><tspan
+         x="11.402344"
+         y="283.09256"
+         id="tspan314571"><tspan
+           dx="0 0 0 0 0 0 6.6512995 0 0 6.6512995 0 0 0 0 0 0 0 0 0 6.6512957"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314569">board or connected equipment.
+</tspan></tspan><tspan
+         x="11.402344"
+         y="296.42593"
+         id="tspan314575">Compliance<tspan
+   style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+   id="tspan314573">
+</tspan></tspan><tspan
+         x="11.402344"
+         y="309.75931"
+         id="tspan314579"><tspan
+           dx="0 0 0 0 0 93.282249"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314577">•EMC 2014/30/EU
+</tspan></tspan><tspan
+         x="11.402344"
+         y="323.09268"
+         id="tspan314583"><tspan
+           dx="0 0 0 0 0 0 88.422859"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314581">•RoHS 2011/65/EU
+</tspan></tspan><tspan
+         x="11.402344"
+         y="336.42606"
+         id="tspan314587"><tspan
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314585">• EN 55032:2015, EN 55035:2017 </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:2.82222px;font-family:'5x5 regular';-inkscape-font-specification:'5x5 regular,  Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;stroke:none;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1"
+       x="0.10758508"
+       y="2.4318519"
+       id="text1"
+       inkscape:label="SAFETY INFORMATION"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:2.82222px;font-family:'5x5 regular';-inkscape-font-specification:'5x5 regular,  Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.25"
+         x="0.10758508"
+         y="2.4318519">Safety Information</tspan></text>
+    <g
+       id="g3"
+       inkscape:label="CE Logo"
+       transform="matrix(0.77497825,0,0,0.77497825,20.04557,48.291584)"
+       style="display:inline">
+      <path
+         d="m 29.922806,52.538352 a 1.3333859,1.3333859 0 0 1 -0.133339,0.0067 1.333386,1.333386 0 0 1 0,-2.666772 1.3333859,1.3333859 0 0 1 0.133339,0.0067 v 0.400015 a 0.93337015,0.93337015 0 0 0 -0.133339,-0.0067 0.93337015,0.93337015 0 0 0 0,1.86674 0.93337015,0.93337015 0 0 0 0.133339,-0.0067 z"
+         fill="#000000"
+         id="path1"
+         style="clip-rule:evenodd;fill-rule:evenodd;stroke-width:0.0133338" />
+      <path
+         d="m 32.189562,52.538352 a 1.3333859,1.3333859 0 0 1 -0.133339,0.0067 1.333386,1.333386 0 0 1 0,-2.666772 1.3333859,1.3333859 0 0 1 0.133339,0.0067 v 0.400015 a 0.93337015,0.93337015 0 0 0 -0.133339,-0.0067 0.93337015,0.93337015 0 0 0 -0.911766,0.733362 h 0.778427 v 0.400016 h -0.778427 a 0.93337015,0.93337015 0 0 0 0.911766,0.733362 0.93337015,0.93337015 0 0 0 0.133339,-0.0067 z"
+         fill="#000000"
+         id="path2"
+         style="clip-rule:evenodd;fill-rule:evenodd;stroke-width:0.0133338" />
+    </g>
+    <g
+       id="g2387"
+       transform="matrix(0.02641707,0,0,0.02641707,40.3764,75.388428)"
+       style="display:inline"
+       inkscape:label="RoHS Logo">
+      <path
+         sodipodi:nodetypes="csssscccsssssssssssscc"
+         id="path2756"
+         d="m 270.1686,496.19119 c -4.70512,-7.25876 -6.00144,-8.96585 -9.83097,-12.94607 -1.45163,-1.50875 -4.96844,-4.81092 -7.81512,-7.33814 -6.04166,-5.36364 -7.61719,-6.84053 -7.61719,-7.14029 0,-0.5231 3.70764,-3.78792 9.66785,-8.51319 4.63351,-3.67346 5.59002,-4.29241 6.63338,-4.29241 h 0.84097 l 1.02458,2.39258 c 2.31917,5.41565 5.65197,12.80653 6.18054,13.70613 0.66604,1.13352 1.38776,1.48726 2.09243,1.02554 0.58177,-0.3812 2.88927,-4.90468 5.29806,-10.38597 2.10362,-4.7869 6.56403,-13.72971 9.30323,-18.65234 3.41152,-6.13088 8.0355,-13.3534 10.49439,-16.39196 3.35574,-4.14685 10.64865,-10.78932 11.15398,-10.29303 0.0739,0.0725 -1.69992,1.13461 -1.32602,0.78881 4.97332,-4.59954 0.19036,9.29752 2.10624,24.62665 0.60693,4.85607 -0.0683,5.12119 -1.96529,6.73593 -6.3917,5.44067 -9.07539,8.28147 -13.73233,14.53626 -8.29638,11.14297 -13.38123,19.32993 -18.1281,29.1875 -0.96063,1.99484 -1.92106,3.87204 -2.13432,4.17154 -0.64215,0.90182 -0.99734,0.70929 -2.24631,-1.21754 z"
+         style="fill:#000000;fill-opacity:1" />
+      <path
+         id="path2762"
+         d="m 274.06814,551.57646 c -7.74446,-0.73082 -12.41381,-1.64142 -18.47682,-3.60325 -16.26076,-5.26155 -30.29907,-15.81995 -39.96577,-30.05879 -6.82964,-10.0599 -10.91144,-20.78595 -12.69034,-33.34731 -0.37958,-2.6803 -0.43681,-3.92474 -0.44253,-9.62144 -0.007,-6.66954 0.0918,-8.09408 0.8964,-12.96012 4.26706,-25.8072 21.65704,-47.85711 45.89396,-58.19199 14.2112,-6.05981 29.92488,-7.6538 45.29291,-4.5945 28.7767,5.72854 52.02246,27.74412 59.35654,56.21536 4.04836,15.71587 3.04323,32.38993 -2.86103,47.46094 -9.48688,24.21592 -30.98797,42.23687 -56.49551,47.3512 -5.35891,1.07449 -9.78004,1.48591 -15.52734,1.44499 -2.36328,-0.0168 -4.6045,-0.0596 -4.98047,-0.0951 z m 12.59765,-5.35313 c 21.21073,-2.11146 40.46157,-13.77064 52.38524,-31.72687 12.26885,-18.47606 15.10684,-42.21211 7.5601,-63.23021 -5.37737,-14.97633 -15.39711,-27.47337 -29.02659,-36.20324 -3.17884,-2.0361 -9.49242,-5.1802 -13.04765,-6.49762 -26.32543,-9.7551 -55.61299,-3.38998 -75.38694,16.38397 -16.5926,16.5926 -23.89887,40.04644 -19.71205,63.27756 1.90944,10.59476 6.4779,21.00536 13.07055,29.78516 2.34406,3.12172 3.31159,4.24259 6.21668,7.20193 12.25115,12.47994 28.02008,19.7919 45.73363,21.20645 2.64721,0.21139 9.15963,0.10623 12.20703,-0.19713 z"
+         style="fill:#000000;fill-opacity:1" />
+      <g
+         transform="translate(-5.18103,-83.625709)"
+         id="g2768">
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 240.382,595.17221 v -14.57104 l 5.41992,0.0934 c 5.68118,0.0979 6.45271,0.20073 8.33133,1.11015 2.20615,1.06798 3.65012,3.16286 4.02141,5.83416 0.57144,4.11133 -1.28689,7.13397 -4.95273,8.05578 l -0.9496,0.23879 0.99028,0.47067 c 1.91368,0.90952 2.44568,1.70692 6.26079,9.38406 l 1.96545,3.95507 h -2.00221 -2.00223 l -2.12127,-4.49515 c -1.1667,-2.47233 -2.44012,-4.95154 -2.82982,-5.50934 -1.38269,-1.97916 -2.69987,-2.48281 -6.51609,-2.49158 l -1.70898,-0.004 v 6.25 6.25 h -1.95313 -1.95312 z m 9.87624,-1.06902 c 1.60163,-0.29075 2.69389,-0.9719 3.35099,-2.08974 0.49519,-0.84242 0.5423,-1.09216 0.5423,-2.87566 0,-1.72119 -0.058,-2.05642 -0.48828,-2.82291 -0.63967,-1.13946 -1.88338,-2.06835 -3.12622,-2.33489 -0.54702,-0.11732 -2.17677,-0.2133 -3.62168,-0.2133 h -2.6271 v 5.27344 5.27344 h 2.40553 c 1.32305,0 2.92705,-0.0947 3.56445,-0.21038 z"
+           id="path2758" />
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 270.42816,609.7689 c -1.46229,-0.4806 -2.26566,-0.99654 -3.33985,-2.14495 -1.73553,-1.85541 -2.47567,-4.04654 -2.63081,-7.78829 -0.21543,-5.19564 0.96578,-8.70834 3.60535,-10.72161 2.52171,-1.92336 7.50295,-2.19583 10.31415,-0.56416 1.06933,0.62066 2.48683,2.17382 3.11462,3.41272 1.14946,2.26835 1.65213,5.81378 1.28635,9.07262 -0.50297,4.48077 -2.30328,7.30864 -5.43267,8.53341 -1.58582,0.62065 -5.30998,0.72846 -6.91714,0.20026 z m 5.69423,-3.01544 c 1.16142,-0.59522 2.04818,-1.8004 2.588,-3.51733 0.5945,-1.89088 0.64338,-6.79018 0.0861,-8.62959 -0.86477,-2.85419 -2.54764,-4.23369 -5.16475,-4.23369 -2.11599,0 -3.41519,0.72395 -4.45105,2.48023 -1.44988,2.45823 -1.54124,8.94025 -0.16455,11.6733 0.64948,1.28936 1.93695,2.34365 3.29947,2.70191 0.95529,0.25118 2.8517,0.0146 3.8068,-0.47483 z"
+           id="path2760" />
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 288.42887,595.19247 v -14.55078 h 1.85547 1.85547 v 5.95703 5.95703 h 5.5664 5.56641 v -5.95703 -5.95703 h 1.85547 1.85547 v 14.55078 14.55078 h -1.85301 -1.85299 l -0.0513,-6.98242 -0.0513,-6.98242 h -5.46875 -5.46875 l -0.0513,6.98242 -0.0513,6.98242 h -1.85299 -1.85301 z"
+           id="path2764" />
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 317.33512,609.84247 c -0.69824,-0.14009 -1.99463,-0.49504 -2.88086,-0.78877 l -1.61133,-0.53407 v -1.98018 -1.98019 l 2.09961,1.02081 c 5.18446,2.52062 10.36504,2.02178 11.98524,-1.15407 0.8614,-1.68847 0.64179,-4.29145 -0.46877,-5.55631 -0.87309,-0.99435 -2.09762,-1.52605 -5.3399,-2.31857 -3.2518,-0.79484 -5.30024,-1.64856 -6.45168,-2.68883 -2.97836,-2.69077 -2.82788,-8.14758 0.30712,-11.13788 1.93493,-1.8456 3.74674,-2.48674 7.04807,-2.49407 2.12086,-0.005 4.07264,0.31547 6.20117,1.01728 l 1.22071,0.40249 v 1.85581 c 0,1.02071 -0.0659,1.82653 -0.14649,1.79072 -0.0806,-0.0358 -0.7357,-0.35331 -1.45588,-0.70557 -5.03076,-2.46069 -10.49521,-1.52242 -11.47302,1.96997 -0.34547,1.2339 -0.17137,3.05168 0.37732,3.93948 0.57469,0.92984 2.59215,1.87009 5.4048,2.51894 4.8892,1.12788 6.95356,2.4108 8.21079,5.1027 0.51136,1.09494 0.54732,1.33857 0.54732,3.71094 0,2.46547 -0.0183,2.57646 -0.63139,3.82943 -1.06388,2.17427 -3.03793,3.62778 -5.69066,4.19005 -1.60277,0.33972 -5.5358,0.33424 -7.25217,-0.0101 z"
+           id="path2766" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:label="German"
+     inkscape:groupmode="layer"
+     id="g15"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-2.8470527,-6.209831)"
+       id="text5"
+       style="font-size:9.73333px;font-family:'5x5 regular';-inkscape-font-specification:'5x5 regular, ';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect15);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.944882;stroke-dasharray:none;stroke-opacity:1"
+       x="0"
+       y="0"
+       inkscape:label="Content"><tspan
+         x="11.402344"
+         y="42.266012"
+         id="tspan314591"><tspan
+           dx="0 0 0 0 0.42066622 0 0 0 0 0 0.42066622 0 0 0.42066622 0 0 0 0 0 0 0 0.42066622 0 0 0 0.42066622 0 0 0 0.42067385 0 0 0 0 0 0.42065859"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314589">Das Sword of Secrets ist ein Lern- und </tspan></tspan><tspan
+         x="11.402344"
+         y="54.432677"
+         id="tspan314595"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4.767796 0 0 0 4.767796 0 0 0 0 0 0 0 0 0 4.767796"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314593">Entwicklungsgerät für Hardware. Es </tspan></tspan><tspan
+         x="11.402344"
+         y="66.599341"
+         id="tspan314599"><tspan
+           dx="0 0 0 0 11.930922 0 0 0 11.930923 0 0 0 11.930927 0 0 0 0 0 0 0 0 0 0 11.930912"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314597">ist für die Verwendung durch </tspan></tspan><tspan
+         x="11.402344"
+         y="78.766005"
+         id="tspan314603"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 2.953259 0 0 0 0 2.953259 0 0 0 0 0 2.9532514 0 0 0 0 0 0 0 0 2.9532514"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314601">Erwachsene oder unter Aufsicht von </tspan></tspan><tspan
+         x="11.402344"
+         y="90.932669"
+         id="tspan314607"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 4.6416211 0 0 0 0 0 0 0 0 0 4.6416211 0 0 4.6416211 0 0 0 4.6416211"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314605">Erwachsenen bestimmt. Es ist kein </tspan></tspan><tspan
+         x="11.402344"
+         y="103.09933"
+         id="tspan314611"><tspan
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314609">Spielzeug.
+</tspan></tspan><tspan
+         x="11.402344"
+         y="115.266"
+         id="tspan314615"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 4.1467328 0 0 0 4.1467328 0 0 0 4.1467252 0 0 0 0 0 4.1467328 0 0 0 0 0 4.1467328"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314613">Verändern Sie das Gerät nicht und </tspan></tspan><tspan
+         x="11.402344"
+         y="127.43266"
+         id="tspan314619"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 6.7121854 0 0 0 6.7121854 0 0 6.7121854 0 0 0 0 0 6.712193 0 0 0 6.7121778"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314617">verbinden Sie es nicht mit nicht </tspan></tspan><tspan
+         x="11.402344"
+         y="139.59933"
+         id="tspan314623"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 42.714439"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314621">konformen Peripheriegeräten. </tspan></tspan><tspan
+         x="11.402344"
+         y="151.76598"
+         id="tspan314627"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0.58392 0 0 0 0 0 0.58392 0 0 0 0.58392"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314625">Verwendete Kabel und Steckverbinder </tspan></tspan><tspan
+         x="11.402344"
+         y="163.93264"
+         id="tspan314631"><tspan
+           dx="0 0 0 0 0 0 0 1.8150067 0 0 0 0 0 0 0 0 0 0 0 1.8150067 0 0 0 0 0 0 0 0 1.8150067 0 0 0 0 1.8150067"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314629">müssen ausreichend isoliert sein und </tspan></tspan><tspan
+         x="11.402344"
+         y="176.09929"
+         id="tspan314635"><tspan
+           dx="0 0 0 0 6.3009763 0 0 0 0 0 0 0 0 0 6.3009763"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314633">den geltenden Sicherheitsstandards </tspan></tspan><tspan
+         x="11.402344"
+         y="188.26595"
+         id="tspan314639"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 0 3.7602391 0 0 0 0 0 0 3.7602429 0 0 0 0 0 0 0 3.7602429"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314637">entsprechen. Dieses Produkt enthält </tspan></tspan><tspan
+         x="11.402344"
+         y="200.43261"
+         id="tspan314643"><tspan
+           dx="0 0 0 0 0 0 0 1.364697 0 0 0 0 0 0 0 0 0 0 0 0 0 1.364697 0 0 0 0 0 1.3646894 0 0 0 1.3647046"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314641">kleine elektronische Teile und scharfe </tspan></tspan><tspan
+         x="11.402344"
+         y="212.59926"
+         id="tspan314647"><tspan
+           dx="0 0 0 0 0 0 0 0 16.991486 0 0 0 16.991489 0 0 0 0 0 0 0 16.991489"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314645">Kanten; von kleinen Kindern </tspan></tspan><tspan
+         x="11.402344"
+         y="224.76592"
+         id="tspan314651"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 132.10614"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314649">fernhalten. 
+</tspan></tspan><tspan
+         x="11.402344"
+         y="236.93258"
+         id="tspan314655"><tspan
+           dx="0 0 0 0 4.757916 0 0 0 0 0 4.757916 0 0 0 4.757916 0 0 0 4.757916 0 0 0 0 0 0 0 0 0 0 0 4.7579083"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314653">Das Gerät ist für Experimente mit </tspan></tspan><tspan
+         x="11.402344"
+         y="249.09923"
+         id="tspan314659"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 6.5790029 0 0 0 6.5790067"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314657">Hardware- und Software-Challenges </tspan></tspan><tspan
+         x="11.402344"
+         y="261.26589"
+         id="tspan314663"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 49.65324"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314661">vorgesehen. Unsachgemäße </tspan></tspan><tspan
+         x="11.402344"
+         y="273.43255"
+         id="tspan314667"><tspan
+           dx="0 0 0 0 0 0 0 0 0 0 0 1.4050984 0 0 0 0 1.4050946 0 0 0 0 0 0 0 1.4050946 0 0 1.4050946"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314665">Verwendung kann Schäden am Board </tspan></tspan><tspan
+         x="11.402344"
+         y="285.5992"
+         id="tspan314671"><tspan
+           dx="0 0 0 0 0 7.1678586 0 0 7.1678586 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7.167851"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314669">oder an angeschlossenen Geräten </tspan></tspan><tspan
+         x="11.402344"
+         y="297.76586"
+         id="tspan314675"><tspan
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314673">verursachen.
+</tspan></tspan><tspan
+         x="11.402344"
+         y="309.93252"
+         id="tspan314679"><tspan
+           style="font-weight:bold"
+           id="tspan314677">Konformitätsinformation
+</tspan></tspan><tspan
+         x="11.402344"
+         y="322.09917"
+         id="tspan314683"><tspan
+           dx="0 0 0 0 0 49.129047 49.129063"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314681">•EMC  2014/30/EU
+</tspan></tspan><tspan
+         x="11.402344"
+         y="334.26583"
+         id="tspan314687"><tspan
+           dx="0 0 0 0 0 0 46.911964 46.911968"
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314685">•RoHS  2011/65/EU
+</tspan></tspan><tspan
+         x="11.402344"
+         y="346.43249"
+         id="tspan314691"><tspan
+           style="font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:justify;stroke:none"
+           id="tspan314689">• EN 55032:2015, EN 55035:2017 </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:2.82222px;font-family:'5x5 regular';-inkscape-font-specification:'5x5 regular, ';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:none;stroke:none;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1"
+       x="-0.11047521"
+       y="2.1763322"
+       id="text6"
+       inkscape:label="SAFETY INFORMATION"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="font-size:2.82222px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.25"
+         x="-0.11047521"
+         y="2.1763322">Sicherheitshinweise</tspan></text>
+    <g
+       id="g7"
+       inkscape:label="CE Logo"
+       transform="translate(11.468044,36.198385)"
+       style="display:inline">
+      <path
+         d="m 29.922806,52.538352 a 1.3333859,1.3333859 0 0 1 -0.133339,0.0067 1.333386,1.333386 0 0 1 0,-2.666772 1.3333859,1.3333859 0 0 1 0.133339,0.0067 v 0.400015 a 0.93337015,0.93337015 0 0 0 -0.133339,-0.0067 0.93337015,0.93337015 0 0 0 0,1.86674 0.93337015,0.93337015 0 0 0 0.133339,-0.0067 z"
+         fill="#000000"
+         id="path6"
+         style="clip-rule:evenodd;fill-rule:evenodd;stroke-width:0.0133338" />
+      <path
+         d="m 32.189562,52.538352 a 1.3333859,1.3333859 0 0 1 -0.133339,0.0067 1.333386,1.333386 0 0 1 0,-2.666772 1.3333859,1.3333859 0 0 1 0.133339,0.0067 v 0.400015 a 0.93337015,0.93337015 0 0 0 -0.133339,-0.0067 0.93337015,0.93337015 0 0 0 -0.911766,0.733362 h 0.778427 v 0.400016 h -0.778427 a 0.93337015,0.93337015 0 0 0 0.911766,0.733362 0.93337015,0.93337015 0 0 0 0.133339,-0.0067 z"
+         fill="#000000"
+         id="path7"
+         style="clip-rule:evenodd;fill-rule:evenodd;stroke-width:0.0133338" />
+    </g>
+    <g
+       id="g14"
+       transform="matrix(0.0340875,0,0,0.0340875,37.702109,71.163036)"
+       style="display:inline"
+       inkscape:label="RoHS Logo">
+      <path
+         sodipodi:nodetypes="csssscccsssssssssssscc"
+         id="path8"
+         d="m 270.1686,496.19119 c -4.70512,-7.25876 -6.00144,-8.96585 -9.83097,-12.94607 -1.45163,-1.50875 -4.96844,-4.81092 -7.81512,-7.33814 -6.04166,-5.36364 -7.61719,-6.84053 -7.61719,-7.14029 0,-0.5231 3.70764,-3.78792 9.66785,-8.51319 4.63351,-3.67346 5.59002,-4.29241 6.63338,-4.29241 h 0.84097 l 1.02458,2.39258 c 2.31917,5.41565 5.65197,12.80653 6.18054,13.70613 0.66604,1.13352 1.38776,1.48726 2.09243,1.02554 0.58177,-0.3812 2.88927,-4.90468 5.29806,-10.38597 2.10362,-4.7869 6.56403,-13.72971 9.30323,-18.65234 3.41152,-6.13088 8.0355,-13.3534 10.49439,-16.39196 3.35574,-4.14685 10.64865,-10.78932 11.15398,-10.29303 0.0739,0.0725 -1.69992,1.13461 -1.32602,0.78881 4.97332,-4.59954 0.19036,9.29752 2.10624,24.62665 0.60693,4.85607 -0.0683,5.12119 -1.96529,6.73593 -6.3917,5.44067 -9.07539,8.28147 -13.73233,14.53626 -8.29638,11.14297 -13.38123,19.32993 -18.1281,29.1875 -0.96063,1.99484 -1.92106,3.87204 -2.13432,4.17154 -0.64215,0.90182 -0.99734,0.70929 -2.24631,-1.21754 z"
+         style="fill:#000000;fill-opacity:1" />
+      <path
+         id="path9"
+         d="m 274.06814,551.57646 c -7.74446,-0.73082 -12.41381,-1.64142 -18.47682,-3.60325 -16.26076,-5.26155 -30.29907,-15.81995 -39.96577,-30.05879 -6.82964,-10.0599 -10.91144,-20.78595 -12.69034,-33.34731 -0.37958,-2.6803 -0.43681,-3.92474 -0.44253,-9.62144 -0.007,-6.66954 0.0918,-8.09408 0.8964,-12.96012 4.26706,-25.8072 21.65704,-47.85711 45.89396,-58.19199 14.2112,-6.05981 29.92488,-7.6538 45.29291,-4.5945 28.7767,5.72854 52.02246,27.74412 59.35654,56.21536 4.04836,15.71587 3.04323,32.38993 -2.86103,47.46094 -9.48688,24.21592 -30.98797,42.23687 -56.49551,47.3512 -5.35891,1.07449 -9.78004,1.48591 -15.52734,1.44499 -2.36328,-0.0168 -4.6045,-0.0596 -4.98047,-0.0951 z m 12.59765,-5.35313 c 21.21073,-2.11146 40.46157,-13.77064 52.38524,-31.72687 12.26885,-18.47606 15.10684,-42.21211 7.5601,-63.23021 -5.37737,-14.97633 -15.39711,-27.47337 -29.02659,-36.20324 -3.17884,-2.0361 -9.49242,-5.1802 -13.04765,-6.49762 -26.32543,-9.7551 -55.61299,-3.38998 -75.38694,16.38397 -16.5926,16.5926 -23.89887,40.04644 -19.71205,63.27756 1.90944,10.59476 6.4779,21.00536 13.07055,29.78516 2.34406,3.12172 3.31159,4.24259 6.21668,7.20193 12.25115,12.47994 28.02008,19.7919 45.73363,21.20645 2.64721,0.21139 9.15963,0.10623 12.20703,-0.19713 z"
+         style="fill:#000000;fill-opacity:1" />
+      <g
+         transform="translate(-5.18103,-83.625709)"
+         id="g13">
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 240.382,595.17221 v -14.57104 l 5.41992,0.0934 c 5.68118,0.0979 6.45271,0.20073 8.33133,1.11015 2.20615,1.06798 3.65012,3.16286 4.02141,5.83416 0.57144,4.11133 -1.28689,7.13397 -4.95273,8.05578 l -0.9496,0.23879 0.99028,0.47067 c 1.91368,0.90952 2.44568,1.70692 6.26079,9.38406 l 1.96545,3.95507 h -2.00221 -2.00223 l -2.12127,-4.49515 c -1.1667,-2.47233 -2.44012,-4.95154 -2.82982,-5.50934 -1.38269,-1.97916 -2.69987,-2.48281 -6.51609,-2.49158 l -1.70898,-0.004 v 6.25 6.25 h -1.95313 -1.95312 z m 9.87624,-1.06902 c 1.60163,-0.29075 2.69389,-0.9719 3.35099,-2.08974 0.49519,-0.84242 0.5423,-1.09216 0.5423,-2.87566 0,-1.72119 -0.058,-2.05642 -0.48828,-2.82291 -0.63967,-1.13946 -1.88338,-2.06835 -3.12622,-2.33489 -0.54702,-0.11732 -2.17677,-0.2133 -3.62168,-0.2133 h -2.6271 v 5.27344 5.27344 h 2.40553 c 1.32305,0 2.92705,-0.0947 3.56445,-0.21038 z"
+           id="path10" />
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 270.42816,609.7689 c -1.46229,-0.4806 -2.26566,-0.99654 -3.33985,-2.14495 -1.73553,-1.85541 -2.47567,-4.04654 -2.63081,-7.78829 -0.21543,-5.19564 0.96578,-8.70834 3.60535,-10.72161 2.52171,-1.92336 7.50295,-2.19583 10.31415,-0.56416 1.06933,0.62066 2.48683,2.17382 3.11462,3.41272 1.14946,2.26835 1.65213,5.81378 1.28635,9.07262 -0.50297,4.48077 -2.30328,7.30864 -5.43267,8.53341 -1.58582,0.62065 -5.30998,0.72846 -6.91714,0.20026 z m 5.69423,-3.01544 c 1.16142,-0.59522 2.04818,-1.8004 2.588,-3.51733 0.5945,-1.89088 0.64338,-6.79018 0.0861,-8.62959 -0.86477,-2.85419 -2.54764,-4.23369 -5.16475,-4.23369 -2.11599,0 -3.41519,0.72395 -4.45105,2.48023 -1.44988,2.45823 -1.54124,8.94025 -0.16455,11.6733 0.64948,1.28936 1.93695,2.34365 3.29947,2.70191 0.95529,0.25118 2.8517,0.0146 3.8068,-0.47483 z"
+           id="path11" />
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 288.42887,595.19247 v -14.55078 h 1.85547 1.85547 v 5.95703 5.95703 h 5.5664 5.56641 v -5.95703 -5.95703 h 1.85547 1.85547 v 14.55078 14.55078 h -1.85301 -1.85299 l -0.0513,-6.98242 -0.0513,-6.98242 h -5.46875 -5.46875 l -0.0513,6.98242 -0.0513,6.98242 h -1.85299 -1.85301 z"
+           id="path12" />
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m 317.33512,609.84247 c -0.69824,-0.14009 -1.99463,-0.49504 -2.88086,-0.78877 l -1.61133,-0.53407 v -1.98018 -1.98019 l 2.09961,1.02081 c 5.18446,2.52062 10.36504,2.02178 11.98524,-1.15407 0.8614,-1.68847 0.64179,-4.29145 -0.46877,-5.55631 -0.87309,-0.99435 -2.09762,-1.52605 -5.3399,-2.31857 -3.2518,-0.79484 -5.30024,-1.64856 -6.45168,-2.68883 -2.97836,-2.69077 -2.82788,-8.14758 0.30712,-11.13788 1.93493,-1.8456 3.74674,-2.48674 7.04807,-2.49407 2.12086,-0.005 4.07264,0.31547 6.20117,1.01728 l 1.22071,0.40249 v 1.85581 c 0,1.02071 -0.0659,1.82653 -0.14649,1.79072 -0.0806,-0.0358 -0.7357,-0.35331 -1.45588,-0.70557 -5.03076,-2.46069 -10.49521,-1.52242 -11.47302,1.96997 -0.34547,1.2339 -0.17137,3.05168 0.37732,3.93948 0.57469,0.92984 2.59215,1.87009 5.4048,2.51894 4.8892,1.12788 6.95356,2.4108 8.21079,5.1027 0.51136,1.09494 0.54732,1.33857 0.54732,3.71094 0,2.46547 -0.0183,2.57646 -0.63139,3.82943 -1.06388,2.17427 -3.03793,3.62778 -5.69066,4.19005 -1.60277,0.33972 -5.5358,0.33424 -7.25217,-0.0101 z"
+           id="path13" />
+      </g>
+    </g>
+  </g>
+</svg>
