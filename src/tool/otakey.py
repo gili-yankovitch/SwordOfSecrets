@@ -2,4 +2,4 @@
 
 from Crypto.Cipher import AES
 
-key = bytes([ x for x in range(AES.block_size) ])
+key = bytes([ 0 for x in range(AES.block_size) ])
