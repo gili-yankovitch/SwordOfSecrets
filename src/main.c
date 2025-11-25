@@ -96,6 +96,9 @@ int setup()
 
         funDigitalWrite(PC3, FUN_HIGH);
 
+        // If failed - try rebooting.
+        NVIC_SystemReset();
+
         goto error;
     }
 
@@ -104,8 +107,6 @@ int setup()
 	printf("Initializing (Reset count: %ld)...\r\n", status.count);
 
     blink(1);
-
-    // blink(status.count);
 
     if (status.count >= 3)
     {
@@ -119,8 +120,6 @@ int setup()
         printf("Done.\r\n");
 
         funDigitalWrite(PC3, FUN_HIGH);
-
-        // goto error;
     }
 
 #ifdef SOLVE
@@ -141,7 +140,6 @@ error:
 void challenges(char * challenge)
 {
     handleChallengeStatus();
-    // blink(1);
 
 #ifdef SOLVE
     printf("Done solving.\r\n");
@@ -200,7 +198,6 @@ void challenges(char * challenge)
     blink(1);
 
 done:
-    // Delay_Ms(1000);
     return;
 #endif
 }
@@ -289,6 +286,12 @@ static void parseCmd(char * data, size_t len)
         resetChallengeStatus();
         setupQuest();
     }
+    else if (!strcmp(CMD_REBOOT, data))
+    {
+        printf("Rebooting...\r\n");
+        Delay_Ms(100);  // Give UART time to send the message
+        NVIC_SystemReset();
+    }
     else if (!memcmp(CMD_DATA, data, 4))
     {
         if (len <= sizeof(CMD_DATA) - 1)
@@ -368,8 +371,6 @@ int main()
 	funGpioInitAll();
 
 	funPinMode( PC3, GPIO_Speed_10MHz | GPIO_CNF_OUT_PP );
-
-    // blink(3);
 
     if (setup() < 0)
     {
