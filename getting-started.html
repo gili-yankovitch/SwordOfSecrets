@@ -1,0 +1,284 @@
+<html>
+
+<head>
+  <base href="." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Getting Started - Sword of Secrets</title>
+  <style>
+    :root {
+      --neon-blue: #00f3ff;
+      --neon-purple: #b026ff;
+      --gold: #ffd700;
+      --golden-yellow: #ffed4e;
+      --dark-gold: #daa520;
+      --brown-gold: #b8860b;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 2rem 1rem;
+    }
+
+    .matrix-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .matrix-column {
+      position: absolute;
+      font-size: 1.2rem;
+      animation: fall linear infinite;
+      color: var(--neon-blue);
+      text-shadow: 0 0 5px var(--neon-blue);
+      white-space: nowrap;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+      }
+
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+
+    .logo-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .title {
+      font-size: 4rem;
+      text-align: center;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+      animation: glowPulse 3s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2.5rem;
+      }
+    }
+
+    @keyframes glowPulse {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 5px var(--neon-blue));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 15px var(--neon-purple));
+      }
+    }
+
+    .content-column {
+      max-width: 800px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    .content-section {
+      margin: 3rem 0;
+      line-height: 1.8;
+    }
+
+    .content-section h2 {
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .content-section h3 {
+      color: var(--neon-purple);
+      text-shadow: 0 0 8px rgba(176, 38, 255, 0.5);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .content-section p {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    .content-image {
+      width: 60%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 2rem auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 243, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0, 243, 255, 0.4);
+    }
+
+    .cta-button {
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      color: white;
+      font-family: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      z-index: 1;
+      position: relative;
+      margin: 10px;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+      padding: 20px 35px;
+    }
+
+    .back-button {
+      margin-bottom: 2rem;
+    }
+
+    /* Style for inline links (not buttons) */
+    .content-section a:not(.cta-button):not(.golden-button) {
+      color: var(--neon-blue);
+      text-decoration: none;
+      border-bottom: 2px solid var(--neon-blue);
+      padding-bottom: 2px;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+    }
+
+    .content-section a:not(.cta-button):not(.golden-button):hover {
+      color: var(--neon-purple);
+      border-bottom-color: var(--neon-purple);
+      text-shadow: 0 0 12px rgba(176, 38, 255, 0.8);
+      box-shadow: 0 2px 8px rgba(176, 38, 255, 0.4);
+    }
+
+    .content-section a:not(.cta-button):not(.golden-button):visited {
+      color: var(--neon-purple);
+      border-bottom-color: var(--neon-purple);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="hero">
+    <div class="matrix-bg" id="matrix-bg"></div>
+
+    <div class="logo-container">
+      <h1 class="title">Getting Started</h1>
+    </div>
+
+    <div class="content-column">
+      <div class="content-section">
+        <p>Welcome to the Sword of Secrets! Thank you for supporting this project. It exists because of you. This guide will help you begin your hardware hacking journey.</p>
+        <p>By now, your sword should have arrived. Share your unboxing or just say hi: <a href="https://x.com/giliyankovitch" target="_blank">@giliyankovitch</a></p>
+        <p>Your sword comes sealed in an electrostatic bag and packed inside a fully recyclable cardboard box, designed specifically for this product. The sword rests beneath the case cover, held in place by two 3D printed pins. Let’s begin by removing it.</p>
+        <p>Turn the case over and push one of the pins outward. It might take a bit of force, since the pins hold the entire case firmly together.</p>
+      </div>
+
+      <img src="images/GettingStarted-01.png" alt="Getting Started Step 1" class="content-image" />
+
+      <div class="content-section">
+        <p>Once the pins have popped out, the sword should come out easily. Congratulations! You have your sword in your hands.</p>
+      </div>
+
+      <img src="images/GettingStarted-02.png" alt="Getting Started Step 2" class="content-image" />
+
+      <div class="content-section">
+        <p>The Sword of Secrets is, as you can immediately see, a USB-powered device. Its PCB is only 1.2 mm thick, which is too thin for a standard USB-A connector. To solve this, a small shim is attached to the bottom of the sword. You will use this shim on the back side of the sword so it fits securely in any USB-A port.</p>
+        <p>To detach the shim, simply snap it off from the sword. It should break away cleanly and without effort.</p>
+      </div>
+
+      <img src="images/GettingStarted-03.png" alt="Getting Started Step 3" class="content-image" />
+
+      <div class="content-section">
+        <p>Now flip the sword over, place the shim on its back side, and plug it into a USB-A port. The added thickness will let it sit snugly and securely in the connector.</p>
+      </div>
+
+      <img src="images/GettingStarted-04.png" alt="Getting Started Step 4" class="content-image" />
+
+      <div class="content-section">
+        <p>Congratulations! Your sword is now ready to use. On startup, it will wait for new firmware and flash a few times. If the LED stays on, press the button to reboot and it should start normally.</p>
+        <p>Now head over to the <a href="https://github.com/gili-yankovitch/SwordOfSecrets" target="_blank">GitHub repository</a> to begin your journey. Good luck! :)</p>
+      </div>
+    </div>
+
+    <div class="back-button">
+        <a href="index.html" class="cta-button">← Back to Home</a>
+      </div>
+  
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Matrix rain effect
+      const matrixBg = document.getElementById('matrix-bg');
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+      const columns = Math.floor(window.innerWidth / 20);
+
+      for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.className = 'matrix-column';
+        column.style.left = `${i * 20}px`;
+
+        // Random content
+        let content = '';
+        for (let j = 0; j < 50; j++) {
+          content += characters[Math.floor(Math.random() * characters.length)] + '\n';
+        }
+        column.textContent = content;
+
+        // Random animation duration and delay
+        const duration = 10 + Math.random() * 20;
+        const delay = Math.random() * -20;
+        column.style.animationDuration = `${duration}s`;
+        column.style.animationDelay = `${delay}s`;
+
+        matrixBg.appendChild(column);
+      }
+    });
+  </script>
+</body>
+
+</html>
+

@@ -153,6 +153,30 @@
       padding: 20px 35px;
     }
 
+    .getting-started-button {
+      background: linear-gradient(45deg, #ff6b9d, #ff8c42);
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      color: white;
+      font-family: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      z-index: 1;
+      position: relative;
+      margin: 10px;
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+    }
+
+    .getting-started-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 107, 157, 0.6);
+      background: linear-gradient(45deg, #ff8c42, #ff6b9d);
+      padding: 20px 35px;
+    }
+
     .features {
 
       @media (min-width: 768px) {
@@ -193,6 +217,28 @@
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2);
     }
+
+    /* Style for inline links (not buttons) */
+    a:not(.cta-button):not(.golden-button):not(.getting-started-button) {
+      color: var(--neon-blue);
+      text-decoration: none;
+      border-bottom: 2px solid var(--neon-blue);
+      padding-bottom: 2px;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+    }
+
+    a:not(.cta-button):not(.golden-button):not(.getting-started-button):hover {
+      color: var(--neon-purple);
+      border-bottom-color: var(--neon-purple);
+      text-shadow: 0 0 12px rgba(176, 38, 255, 0.8);
+      box-shadow: 0 2px 8px rgba(176, 38, 255, 0.4);
+    }
+
+    a:not(.cta-button):not(.golden-button):not(.getting-started-button):visited {
+      color: var(--neon-purple);
+      border-bottom-color: var(--neon-purple);
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
@@ -213,6 +259,12 @@
     </p>
 
     <img src="images/sword.png" />
+
+    <div class="buttons" style="margin-bottom: 30px;">
+      <a href="getting-started.html" class="getting-started-button">
+        Getting Started
+      </a>
+    </div>
 
     <div class="buttons">
       <a href="https://github.com/gili-yankovitch/SwordOfSecrets" class="cta-button">
