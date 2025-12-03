@@ -141,7 +141,6 @@ body {
 }
 
 body {
-  font-family: arial;
   margin: 0;
   padding: none;
 }
@@ -276,6 +275,15 @@ canvas.emscripten { border: 0px none; background-color: black; }
   box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
 }
 
+.content-column {
+      max-width: 1000px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
 </style>
 </head>
 <body>
@@ -286,7 +294,12 @@ canvas.emscripten { border: 0px none; background-color: black; }
         <h1 class="title">Firmware Flash Utility</h1>
       </div>
 
+      <div class="content-column">
+        Download the latest firmware update for your Sword of Secrets. To update the sword, press the reset button and hit "Flash" roughly 0.5 seconds after the reset button is pressed. </br>
+      </div>
 	<div id = "control">
+    
+
   <input type="file" class = "cta-file" id="fileInput" />
   <button id="connectBtn" class = "cta-button" >Connect to Serial Port</button>
   <button id="sendBtn" disabled class = "cta-button">Flash</button>
