@@ -3,5 +3,5 @@ src/sim.py
 solve.*
 *.d
 *.o
-firmware*
+firmware.*
 generated_ch32v003.ld
