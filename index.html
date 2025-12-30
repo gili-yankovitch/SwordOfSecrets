@@ -177,6 +177,30 @@
       padding: 20px 35px;
     }
 
+    .crowdsupply-button {
+      background: linear-gradient(45deg, #009999, #00ccaa);
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      color: white;
+      font-family: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      z-index: 1;
+      position: relative;
+      margin: 10px;
+      box-shadow: 0 4px 15px rgba(0, 153, 153, 0.4);
+    }
+
+    .crowdsupply-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 153, 153, 0.6);
+      background: linear-gradient(45deg, #00ccaa, #009999);
+      padding: 20px 35px;
+    }
+
     .features {
 
       @media (min-width: 768px) {
@@ -219,7 +243,7 @@
     }
 
     /* Style for inline links (not buttons) */
-    a:not(.cta-button):not(.golden-button):not(.getting-started-button) {
+    a:not(.cta-button):not(.golden-button):not(.getting-started-button):not(.crowdsupply-button) {
       color: var(--neon-blue);
       text-decoration: none;
       border-bottom: 2px solid var(--neon-blue);
@@ -228,14 +252,14 @@
       text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
     }
 
-    a:not(.cta-button):not(.golden-button):not(.getting-started-button):hover {
+    a:not(.cta-button):not(.golden-button):not(.getting-started-button):not(.crowdsupply-button):hover {
       color: var(--neon-purple);
       border-bottom-color: var(--neon-purple);
       text-shadow: 0 0 12px rgba(176, 38, 255, 0.8);
       box-shadow: 0 2px 8px rgba(176, 38, 255, 0.4);
     }
 
-    a:not(.cta-button):not(.golden-button):not(.getting-started-button):visited {
+    a:not(.cta-button):not(.golden-button):not(.getting-started-button):not(.crowdsupply-button):visited {
       color: var(--neon-purple);
       border-bottom-color: var(--neon-purple);
     }
@@ -263,6 +287,12 @@
     <div class="buttons" style="margin-bottom: 30px;">
       <a href="getting-started.html" class="getting-started-button">
         Getting Started
+      </a>
+    </div>
+
+    <div class="buttons" style="margin-bottom: 30px;">
+      <a href="https://www.crowdsupply.com/nyx-software-security-solutions/sword-of-secrets" class="crowdsupply-button">
+        Order from CrowdSupply
       </a>
     </div>
 
