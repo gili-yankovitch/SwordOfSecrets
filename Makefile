@@ -59,6 +59,8 @@ CFLAGS+= \
 LDFLAGS+=-T $(LINKER_SCRIPT) -Wl,--gc-sections
 FILES_TO_COMPILE:=$(SYSTEM_C) $(OBJS)
 
+all: firmware.elf
+
 closechlink :
 	-killall minichlink
 
@@ -111,4 +113,3 @@ build : $(TARGET).bin
 
 .PHONY: closechlink terminal flash clean erase build all
 
-all: firmware.elf
