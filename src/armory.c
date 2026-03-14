@@ -47,8 +47,7 @@ int palisade()
         goto error;
     }
 
-    printf(message);
-    printf("\r\n");
+    printf("%s\r\n", message);
 
     err = 0;
 error:
@@ -107,8 +106,7 @@ int parapet()
 
     message[AES_BLOCKLEN * 2] = '\0';
 
-    printf(message);
-    printf("\r\n");
+    printf("%s\r\n",message);
 
     err = 0;
 error:
