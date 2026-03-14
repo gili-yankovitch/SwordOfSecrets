@@ -99,7 +99,6 @@ clean :
 	$(TARGET).hex \
 	$(TARGET).lst \
 	$(TARGET).map \
-	$(TARGET).hex \
 	src/*.o \
 	ext/tiny-aes-c/*.o \
 	src/framework/generated_ch32v003.ld \
