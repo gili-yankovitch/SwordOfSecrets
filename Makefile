@@ -109,6 +109,6 @@ erase :
 
 build : $(TARGET).bin
 
-.PHONY: closechlink terminal flash clean erase build asm-list all
+.PHONY: closechlink terminal flash clean erase build all
 
 all: firmware.elf
