@@ -147,8 +147,7 @@ int postern()
         goto error;
     }
 
-    printf(message);
-    printf("\r\n");
+    printf("%s\r\n", message);
 
     err = 0;
 error:
@@ -157,8 +156,7 @@ error:
 
 static size_t println_export(const char m[])
 {
-    int n = printf(m);
-    return printf("\r\n") + n;
+    return printf("%s\r\n", m);
 }
 
 char code[128];
