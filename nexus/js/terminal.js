@@ -26,7 +26,7 @@ const HELP = `Available commands:
   DEBUG                   Toggle protocol debug output
   CLEAR                   Clear the screen
   HELP                    Show this help
-  EXIT                    Disconnect
+  EXIT                    Disconnect`;
 
 export class Terminal {
   constructor(root) {
