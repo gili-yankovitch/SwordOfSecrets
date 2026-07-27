@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEXUS // client source</title>
+  <link rel="stylesheet" href="../css/nexus.css" />
+  <style>
+    #src { padding: 16px 20px; overflow: auto; }
+    .file { margin: 0 0 26px; }
+    .file h2 { color: var(--cyan); border-bottom: 1px solid #123842; padding-bottom: 4px; letter-spacing: 1px; }
+    .file pre { background: var(--bg2); border: 1px solid #12241b; padding: 12px; overflow-x: auto; white-space: pre; color: var(--fg); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 20px; }
+    .tabs a { color: var(--green); text-decoration: none; border: 1px solid var(--green-dim); padding: 4px 10px; }
+    .tabs a:hover { background: rgba(53,255,138,.1); }
+    .back { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand">NEXUS<span class="brand-sub">//client-source</span></div>
+    <a class="back" href="../">&larr; back to terminal</a>
+  </header>
+
+  <p class="tabs" id="tabs"></p>
+  <main id="src"></main>
+
+  <script type="module">
+    // The readable client + protocol. This is the challenge material: read it to
+    // understand the handshake, the envelope, and where the version field lives.
+    const FILES = [
+      ["js/client.js", "the operator client + handshake (start here)"],
+      ["js/protocol.js", "canonical JSON, integrity (SHA-256 vs CRC-16), envelope"],
+      ["js/tool.js", "the window.nexus exploit toolkit"],
+      ["js/se-webserial.js", "how the browser talks to the sword"],
+      ["js/crypto.js", "signature verification (WebCrypto)"],
+      ["js/server.js", "the in-browser NEXUS server"],
+    ];
+    const tabs = document.getElementById("tabs");
+    const src = document.getElementById("src");
+    for (const [path, desc] of FILES) {
+      const a = document.createElement("a");
+      a.href = "#" + path; a.textContent = path.split("/").pop();
+      tabs.appendChild(a);
+    }
+    async function render() {
+      src.innerHTML = "";
+      for (const [path, desc] of FILES) {
+        const wrap = document.createElement("section");
+        wrap.className = "file";
+        wrap.id = path;
+        const h = document.createElement("h2");
+        h.textContent = path + "  —  " + desc;
+        const pre = document.createElement("pre");
+        try {
+          const txt = await (await fetch("../" + path)).text();
+          pre.textContent = txt;
+        } catch (e) {
+          pre.textContent = "// could not load " + path + ": " + e.message;
+        }
+        wrap.append(h, pre);
+        src.appendChild(wrap);
+      }
+    }
+    render();
+  </script>
+</body>
+</html>

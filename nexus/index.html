@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEXUS // Secure Operator Terminal</title>
+  <link rel="stylesheet" href="css/nexus.css" />
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand">NEXUS<span class="brand-sub">//defense-net</span></div>
+    <div class="topbar-right">
+      <button id="connect" class="connect-btn">Connect</button>
+    </div>
+  </header>
+
+  <main id="terminal"></main>
+
+  <footer class="statusbar">
+    <span id="status">DISCONNECTED</span>
+    <span class="spacer"></span>
+  </footer>
+
+  <script type="module">
+    import { Terminal } from "./js/terminal.js";
+
+    const term = new Terminal(document.getElementById("terminal"));
+    term.mount();
+
+    const btn = document.getElementById("connect");
+    const status = document.getElementById("status");
+    btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      btn.textContent = "Connecting...";
+      await term.connect();
+      if (term.client) {
+        btn.textContent = "Sword Connected";
+        status.textContent = "SECURE CHANNEL ONLINE";
+        status.classList.add("online");
+      } else {
+        btn.disabled = false;
+        btn.textContent = "Connect Sword";
+      }
+    });
+  </script>
+</body>
+</html>
