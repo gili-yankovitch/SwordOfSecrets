@@ -5,7 +5,10 @@
 //   * ECDSA-P256 signature verification (raw r||s, SHA-256), matching Python
 //     verify_signature_hex()
 //   * certificate verification against the server public key
-//   * AES-GCM + SHA-256 KDF to decrypt the flag using the sword oracle.
+//
+// The flag is NOT decrypted here. A winning WRITE returns it AES-256-CBC-
+// encrypted under SHA-256 of the previous challenge's final flag; the operator
+// decrypts it offline once they have that flag.
 //
 // secp256r1 raw signatures are r||s (64 bytes) which is exactly the IEEE-P1363
 // form WebCrypto expects -- no DER conversion needed.
@@ -74,18 +77,6 @@ export async function certificateToPubKey(cert) {
   return importSEPublicKey(cert.public_key);
 }
 
-// --- flag decryption (sword oracle) ---------------------------------------
-
-// key = SHA-256(nonce_response bytes); flag = AES-256-GCM(key, iv, ct)
-export async function deriveFlagKey(nonceResponseHex) {
-  const digest = await crypto.subtle.digest("SHA-256", hexToBytes(nonceResponseHex));
-  return crypto.subtle.importKey("raw", digest, { name: "AES-GCM" }, false, ["decrypt"]);
-}
-
-export async function decryptFlag(blob, nonceResponseHex) {
-  const key = await deriveFlagKey(nonceResponseHex);
-  const iv = b64ToBytes(blob.iv);
-  const ct = b64ToBytes(blob.ct);
-  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
-  return new TextDecoder().decode(pt);
-}
+// Flag decryption intentionally omitted -- the flag stays encrypted in the
+// browser (AES-128-CBC under the previous challenge's key) and is decrypted
+// offline by the operator, so no key or decrypt routine ships here.

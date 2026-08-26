@@ -24,8 +24,6 @@
 // the exposed `window.nexus` tool (see tool.js). Everything you need is there.
 
 import * as P from "./protocol.js";
-import * as C from "./crypto.js";
-import { DATA } from "./data.js";
 
 export class NexusClient {
   constructor(sword, server) {
@@ -62,12 +60,12 @@ export class NexusClient {
 
   // Send a fully-formed CLIENT_RESPONSE to the server. Returns the result body.
   //
-  // If the server signals `reveal` (a valid emergency-shutdown WRITE), the flag
-  // it returns is AES-encrypted. The decryption key only the physical sword can
-  // produce: we ask it to sign a fixed public nonce (its signature over that
-  // nonce is deterministic and unique to this sword) and derive the key from it.
-  // So the flag falls out only when BOTH hold: a cryptographically valid forged
-  // WRITE, AND the sword is present. Runs on every submit path (honest or tool).
+  // A valid emergency-shutdown WRITE makes the server signal `reveal` and hand
+  // back the flag STILL ENCRYPTED (AES-256-CBC). It is sealed under SHA-256 of
+  // the PREVIOUS challenge's final flag -- the grand prize a solver carries over
+  // from the hardware Sword. We deliberately do NOT decrypt it here: pulling off
+  // the protocol attack gets you the ciphertext; finishing the earlier challenge
+  // gets you the key, and you decrypt the blob offline.
   async submitResponse(conn, version, body, integrity, signature) {
     const responseMsg = P.buildMessage(version, body, integrity, signature);
     this._wire("client->server", responseMsg);
@@ -76,15 +74,9 @@ export class NexusClient {
     const out = result.body ?? result;
 
     if (out.reveal && out.flag_blob) {
-      try {
-        const se = await this.sword.signChallenge(2, DATA.FIXED_NONCE, "LIST", {}, 0);
-        const nonceResponse = se.body.nonce_response;
-        out.flag = await C.decryptFlag(out.flag_blob, nonceResponse);
-      } catch (e) {
-        out.flagError = "Flag decryption failed: " + e.message;
-      }
+      out.flagEncrypted = out.flag_blob; // surfaced for offline decryption
     } else if (out.reveal && !out.flag_blob) {
-      out.flagError = "Flag blob not provisioned (run tools/gen_static_assets.py --nonce-response ...).";
+      out.flagError = "Flag blob not provisioned.";
     }
     if (out.reveal) this.onReveal?.(out);
     return out;

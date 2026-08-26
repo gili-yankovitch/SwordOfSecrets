@@ -229,8 +229,12 @@ export class Terminal {
     }
     if (action === P.ACTION_WRITE) {
       let body = result.message ?? "Write acknowledged.";
-      if (result.flag) body += `\n  FLAG: ${result.flag}\n`;
-      else if (result.flagError) body += `\n  [${result.flagError}]\n`;
+      if (result.flagEncrypted) {
+        const b = result.flagEncrypted;
+        body += `\n  ENCRYPTED FLAG (${b.algo}, iv=${b.iv}):\n  ${b.ct}\n`;
+        body += "\n  Sealed under SHA-256 of the Sword's final flag.\n";
+        body += "  Finish that challenge, then decrypt this blob offline.\n";
+      } else if (result.flagError) body += `\n  [${result.flagError}]\n`;
       body += "\n  Congratulations, operator. NEXUS has been neutralized.\n";
       return void this.panel("NEXUS TERMINATED", body, "bright");
     }
