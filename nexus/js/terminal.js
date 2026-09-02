@@ -64,7 +64,14 @@ export class Terminal {
         this.runCommand(raw);
       }
     });
-    this.root.addEventListener("click", () => this.input.focus());
+    this.root.addEventListener("mouseup", (e) => {
+      const sel = window.getSelection();
+      const isSelecting = sel && sel.toString().length > 0;
+      if (!isSelecting) {
+        this.input.focus();
+      }
+    });
+    //this.root.addEventListener("click", () => this.input.focus());
   }
 
   // ---- output primitives (rich-ish) --------------------------------------
