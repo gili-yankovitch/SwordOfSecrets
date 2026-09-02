@@ -1,3 +1,5 @@
+.venv/
+
 keys.h
 src/sim.py
 solve.*

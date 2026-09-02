@@ -324,7 +324,7 @@ static void parseCmd(char * data, size_t len)
             }
 
             // Skip all the next non-numbers
-            while (xtoi(data[i]) == 0xff)
+            while ((i < len) && xtoi(data[i]) == 0xff)
             {
                 i++;
             }
@@ -343,7 +343,8 @@ static void handleSerialRead()
 
     while (len < sizeof(data) - 1)
     {
-        data[len++] = _gets();
+        data[len] = _gets(); // blocking read of a single character (not a string!)
+        len++;
 
         if ((data[len - 1] == '\r') || (data[len - 1] == '\n'))
         {

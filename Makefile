@@ -30,7 +30,14 @@ MINICHLINK?=minichlink
 WRITE_SECTION?=flash
 SYSTEM_C?=src/framework/ch32v003fun.c
 
-CFLAGS:=$(CFLAGS) -MMD -MP -g -Os -flto -ffunction-sections -fdata-sections -fmessage-length=0 -msmall-data-limit=8 -Isrc/include/ -Isrc/framework/include/ -Iext/micro-ecc/ -Iext/tiny-aes-c/
+CFLAGS:=$(CFLAGS) \
+    -MMD -MP -g -Os -flto -ffunction-sections \
+	-fdata-sections -fmessage-length=0 \
+	-msmall-data-limit=8 \
+	-Isrc/include/ \
+	-Isrc/framework/include/ \
+	-Iext/micro-ecc/ \
+	-Iext/tiny-aes-c/
 
 CFLAGS_ARCH+=-march=rv32ec -mabi=ilp32e -DCH32V003=1
 GENERATED_LD_FILE?=src/framework/generated_ch32v003.ld
@@ -39,12 +46,15 @@ LINKER_SCRIPT?=$(GENERATED_LD_FILE)
 LDFLAGS+=-L$(CH32V003FUN)/../misc -lgcc
 
 CFLAGS+= \
-	$(CFLAGS_ARCH) -static-libgcc \
+	$(CFLAGS_ARCH) \
+	-static-libgcc \
 	-I$(NEWLIB) \
 	-I$(CH32V003FUN)/../extralibs \
 	-I$(CH32V003FUN) \
 	-nostdlib \
-	-I. -Wall $(EXTRA_CFLAGS)
+	-I. \
+	-Wall \
+	$(EXTRA_CFLAGS)
 
 LDFLAGS+=-T $(LINKER_SCRIPT) -Wl,--gc-sections
 FILES_TO_COMPILE:=$(SYSTEM_C) $(OBJS)
@@ -59,7 +69,14 @@ terminal : monitor
 FLASH_COMMAND?=$(MINICHLINK) -c /dev/ttyACM0 -w $< $(WRITE_SECTION) -b
 
 $(GENERATED_LD_FILE) :
-	$(PREFIX)-gcc -E -P -x c -DTARGET_MCU=$(TARGET_MCU) -DMCU_PACKAGE=$(MCU_PACKAGE) -DTARGET_MCU_LD=$(TARGET_MCU_LD) src/framework/ch32v003fun.ld > $(GENERATED_LD_FILE)
+	$(PREFIX)-gcc \
+	-E \
+	-P \
+	-x c \
+	-DTARGET_MCU=$(TARGET_MCU) \
+	-DMCU_PACKAGE=$(MCU_PACKAGE) \
+	-DTARGET_MCU_LD=$(TARGET_MCU_LD) \
+	src/framework/ch32v003fun.ld > $(GENERATED_LD_FILE)
 
 %.o: %.c
 	$(PREFIX)-gcc -c $< -o $@ $(CFLAGS)
@@ -78,11 +95,21 @@ flash : $(TARGET).bin
 	$(FLASH_COMMAND)
 
 clean :
-	rm -rf $(TARGET).elf $(TARGET).bin $(TARGET).hex $(TARGET).lst $(TARGET).map $(TARGET).hex src/*.o ext/tiny-aes-c/*.o src/framework/generated_ch32v003.ld || true
+	rm -rf \
+	$(TARGET).elf \
+	$(TARGET).bin \
+	$(TARGET).hex \
+	$(TARGET).lst \
+	$(TARGET).map \
+	src/*.o \
+	ext/tiny-aes-c/*.o \
+	src/framework/generated_ch32v003.ld \
+	|| true
 
 erase :
 	$(MINICHLINK) -p
 
 build : $(TARGET).bin
 
-.PHONY: src/framework/include/i2c_slave.h
+.PHONY: closechlink terminal flash clean erase build all
+

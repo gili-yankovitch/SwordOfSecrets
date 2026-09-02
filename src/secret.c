@@ -5,7 +5,7 @@
 #define MEM_SIZE 256
 #define STACK_SIZE 16
 
-#ifndef GOLD_CHELLANGE
+#ifndef GOLD_CHALLENGE
 
 uint8_t tape[MEM_SIZE] = { 0 };
 
@@ -17,8 +17,8 @@ void treasure(char * inst, size_t len)
             case '\053':  {      {          }     tape[dp]++; break;}
             case '\074': {        {        }   dp+=0xffffffff;break;}
             case   '\055':{        {      }       tape[dp]--; break;}
-            case    '.':    {       {    }    printf("%x", tape[dp]);
-            printf(" ");            {    }      break;  }  case  '[':
+            case    '.':    {       {    }       printf("%02x", tape[
+            dp]); printf(" ");      {    }      break;  }  case  '[':
             { if  (tape[dp]) {      {    }          stack[sp++] = ip;
             } else   {              {    }  uint8_t tmp = ip, depth =
             0;while(inst[tmp]){     {    }              if (inst[tmp]

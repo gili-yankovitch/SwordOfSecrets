@@ -36,19 +36,18 @@ void xcryptXorKey(uint8_t * buf, size_t len, uint8_t * k)
 int palisade()
 {
     int err = -1;
-    char message[128] = { 0 };
+    char message[129] = { 0 };
 
-    flash_read(PALISADE_FLASH_ADDR, message, sizeof(message));
+    flash_read(PALISADE_FLASH_ADDR, message, sizeof(message)-1);
 
-    xcryptXor((uint8_t *)message, sizeof(message));
+    xcryptXor((uint8_t *)message, sizeof(message)-1);
 
     if (memcmp(message, FLAG_BANNER, strlen(FLAG_BANNER)))
     {
         goto error;
     }
 
-    printf(message);
-    printf("\r\n");
+    printf("%s\r\n", message);
 
     err = 0;
 error:
@@ -107,8 +106,7 @@ int parapet()
 
     message[AES_BLOCKLEN * 2] = '\0';
 
-    printf(message);
-    printf("\r\n");
+    printf("%s\r\n",message);
 
     err = 0;
 error:
@@ -143,14 +141,13 @@ int postern()
 
     message[len - message[len - 1]] = '\0';
 
-    // Chet everything's OK!
+    // Check everything's OK!
     if (memcmp(response, FINAL_PASSWORD, strlen(FINAL_PASSWORD)))
     {
         goto error;
     }
 
-    printf(message);
-    printf("\r\n");
+    printf("%s\r\n", message);
 
     err = 0;
 error:
@@ -159,8 +156,7 @@ error:
 
 static size_t println_export(const char m[])
 {
-    int n = printf(m);
-    return printf("\r\n") + n;
+    return printf("%s\r\n", m);
 }
 
 char code[128];
